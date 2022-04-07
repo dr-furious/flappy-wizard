@@ -1,0 +1,975 @@
+@import url("http://fonts.cdnfonts.com/css/harry-potter");
+
+:root {
+    --in-menu-font: "Harry Potter", sans-serif;
+    --game-width: 1280px;
+    --game-height: 720px;
+
+    --menus-width: 1250px;
+    --menus-height: 690px;
+
+    --game-menu-width: 900px;
+    --game-menu-height: 600px;
+
+    --game-over-menu-width: 720px;
+    --game-over-menu-height: 420px;
+
+    --button-cube-side: 75px;
+
+    --button-polygon-1-width: 129px;
+    --button-polygon-1-height: 75px;
+
+    --button-polygon-2-width: 290px;
+    --button-polygon-2-height: 75px;
+
+    --button-polygon-3-width: 350px;
+    --button-polygon-3-height: 75px;
+
+    --box-shadow-black: 0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(0, 0, 0, 0.6),
+    0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Fixes flex-box issue when hiding elements */
+[hidden] {
+    display: none !important;
+}
+
+body {
+    background-color: cornsilk;
+    font-family: var(--in-menu-font);
+    color: silver;
+}
+
+div.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+div.container {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: var(--game-width);
+    height: var(--game-height);
+}
+
+canvas {
+    position: absolute;
+    border: 2px solid black;
+    background: linear-gradient(30deg, lightgreen, lightblue);
+    width: var(--game-width);
+    height: var(--game-height);
+}
+
+section {
+    padding: 5px;
+}
+
+section.menu {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    width: var(--menus-width);
+    height: var(--menus-height);
+}
+
+button {
+    color: silver;
+    background: rgba(100, 100, 100, 0.2);
+    border: 2px solid silver;
+    border-radius: 20px;
+    margin: 5px;
+    transition: background-color 0.5s;
+}
+
+button.button-cube {
+    width: var(--button-cube-side);
+    height: var(--button-cube-side);
+}
+
+span.icon-in-button-cube {
+    font-size: 50px;
+    display: inline-flex;
+    align-self: center;
+    overflow: hidden;
+}
+
+span.icon-in-button-polygon-2 {
+    font-size: 40px;
+    display: inline-flex;
+    align-self: center;
+    overflow: hidden;
+}
+
+span.text-in-button-polygon-2 {
+    font-size: 30px;
+    display: inline-flex;
+    align-self: center;
+    overflow: hidden;
+}
+
+button:hover {
+    background: rgba(150, 150, 150, 0.5);
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.8),
+    0 0 4px rgba(255, 255, 255, 0.6),
+    0 0 6px rgba(255, 255, 255, 0.4),
+    0 0 8px rgba(255, 255, 255, 0.2),
+    0 0 14px rgba(255, 255, 255, 0.1);
+}
+
+button:active {
+    background: rgba(100, 100, 100, 0.5);
+}
+
+a:hover,
+button:hover,
+input[type="radio"]:hover + label {
+    cursor: pointer;
+}
+
+/*
+===============================================================
+                    MAIN MENU */
+div.menu-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+div#title {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 23px;
+}
+
+div#title p {
+    font-family: "Times New Roman", serif;
+    margin-top: 12px;
+}
+
+div#title q {
+    font-style: italic;
+}
+
+h1#harry-potter {
+    font-size: 50px;
+    color: silver;
+}
+
+
+div.right-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button.button-help ion-icon {
+    --ionicon-stroke-width: 100px;
+    z-index: 1;
+}
+
+div.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+hr#main-menu-hr {
+    margin-bottom: 40px;
+    width: 50%;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+
+div.game-difficulty-buttons input[type="radio"] {
+    display: none;
+}
+
+div.game-difficulty-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.game-difficulty-buttons label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: silver;
+    font-family: var(--in-menu-font);
+    font-size: 30px;
+    width: var(--button-polygon-1-width);
+    height: var(--button-polygon-1-height);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    border-radius: 20px;
+    margin: 10px;
+    transition: background-color 0.5s;
+
+}
+
+/* ------ STATIC STATE ------ */
+label.button-easy {
+    background-color: rgb(11, 119, 11);
+}
+
+label.button-medium {
+    background-color: rgb(194, 135, 0);
+}
+
+label.button-hard {
+    background-color: rgb(13, 79, 157);
+}
+
+label.button-insane {
+    background-color: rgb(152, 5, 5);
+}
+
+label.button-easy,
+label.button-medium,
+label.button-hard,
+label.button-insane {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.9),
+    0 2px 2px rgba(0, 0, 0, 0.9),
+    0 4px 4px rgba(0, 0, 0, 0.9),
+    0 8px 8px rgba(255, 255, 255, 0.12),
+    0 16px 16px rgba(255, 255, 255, 0.12),
+    0 24px 24px rgba(255, 255, 255, 0.12);
+}
+
+/* ------ HOVER STATE ------ */
+label.button-easy:hover {
+    background-color: rgb(5, 86, 5);
+}
+
+label.button-medium:hover {
+    background-color: rgb(147, 107, 0);
+}
+
+label.button-hard:hover {
+    background-color: rgb(11, 57, 112);
+}
+
+label.button-insane:hover {
+    background-color: rgb(124, 5, 5);
+}
+
+/* ------ CLICKED (focus) STATE ------ */
+
+
+input#radiobutton-easy:checked + label.button-easy {
+    background-color: rgb(3, 59, 3);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.9),
+    0 2px 2px rgba(0, 0, 0, 0.9),
+    0 4px 4px rgba(0, 0, 0, 0.9),
+    0 8px 8px rgba(11, 119, 11, 0.4),
+    0 16px 16px rgba(11, 119, 11, 0.6);
+}
+
+input#radiobutton-medium:checked + label.button-medium {
+    background-color: rgb(119, 85, 1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.9),
+    0 2px 2px rgba(0, 0, 0, 0.9),
+    0 4px 4px rgba(0, 0, 0, 0.9),
+    0 8px 8px rgba(194, 135, 0, 0.4),
+    0 16px 16px rgba(194, 135, 0, 0.6);
+}
+
+input#radiobutton-hard:checked + label.button-hard {
+    background-color: rgb(9, 45, 94);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.9),
+    0 2px 2px rgba(0, 0, 0, 0.9),
+    0 4px 4px rgba(0, 0, 0, 0.9),
+    0 8px 8px rgba(13, 79, 157, 0.4),
+    0 16px 16px rgba(13, 79, 157, 0.6);
+}
+
+input#radiobutton-insane:checked + label.button-insane {
+    background-color: rgb(110, 3, 3);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.9),
+    0 2px 2px rgba(0, 0, 0, 0.9),
+    0 4px 4px rgba(0, 0, 0, 0.9),
+    0 8px 8px rgba(171, 6, 6, 0.4),
+    0 16px 16px rgba(171, 6, 6, 0.6);
+}
+
+
+div.game-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+div.game-options button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+button.button-polygon-2 {
+    width: var(--button-polygon-2-width);
+    height: var(--button-polygon-2-height);
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.button-polygon-2 span {
+    padding: 4px;
+    font-family: var(--in-menu-font);
+}
+
+button.button-play:hover {
+    color: lightgreen;
+}
+
+button.button-leaderboard:hover {
+    color: lightsalmon;
+}
+
+button.button-change-character:hover {
+    color: lightskyblue;
+}
+
+/*===============================================================*/
+
+
+/*
+===============================================================
+                    GAME (paused) MENU */
+section#game-menu {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: var(--game-menu-width);
+    height: var(--game-menu-height);
+    display: flex;
+    flex-direction: column;
+}
+
+
+div.game-paused-menu-top {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+section#game-menu h1 {
+    font-size: 50px;
+    padding-top: 15px;
+}
+
+div.paused-title {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 5px;
+}
+
+div.game-paused-settings {
+    width: 90%;
+    margin-top: 50px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(0, 0, 0, 0.6),
+    0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+hr#game-menu-hr {
+    align-self: center;
+    width: 50%;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+
+div.game-paused-sounds-music {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+div#game-paused-sound,
+div#game-paused-music {
+    display: flex;
+    justify-content: flex-start;
+    width: 80%;
+    flex-grow: 1;
+}
+
+div#game-paused-music {
+    margin-left: 20px;
+}
+
+div.game-paused-menu-top button {
+    z-index: 1;
+}
+
+div.slide-container {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    flex-grow: 1;
+}
+
+input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10%;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+input.sound-slider::-webkit-slider-thumb,
+input.music-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(0, 0, 0, 0.6),
+    0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+input.sound-slider::-webkit-slider-runnable-track,
+input.music-slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+}
+
+div.game-paused-settings button.button-sound:hover {
+    color: rgba(255, 27, 255, 1);
+}
+
+input.sound-slider {
+    background-image: linear-gradient(rgba(255, 27, 255, 0.5), rgba(255, 27, 255, 0.5));
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+}
+
+input.sound-slider:hover {
+    background-image: linear-gradient(rgba(255, 27, 255, 0.8), rgba(255, 27, 255, 0.8));
+}
+
+input.sound-slider::-webkit-slider-thumb {
+    background: rgba(255, 27, 255, 1);
+}
+
+div.game-paused-settings button.button-music:hover {
+    color: rgba(71, 0, 204, 1);
+}
+
+input.music-slider {
+    background-image: linear-gradient(rgba(71, 0, 204, 0.5), rgba(71, 0, 204, 0.5));
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+}
+
+input.music-slider:hover {
+    background-image: linear-gradient(rgba(71, 0, 204, 0.8), rgba(71, 0, 204, 0.8));
+}
+
+input.music-slider::-webkit-slider-thumb {
+    background: rgba(71, 0, 204, 1);
+}
+
+
+div.game-stats {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+div.game-stats-table {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: stretch;
+    border-radius: 20px;
+    width: 90%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(0, 0, 0, 0.6),
+    0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+div.points,
+div.missed-hooks,
+div.time {
+    border: 2px solid silver;
+    border-radius: 20px;
+    margin: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 130%;
+    transition: font-size 0.1s;
+}
+
+div.points:hover,
+div.missed-hooks:hover,
+div.time:hover {
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.6),
+    0 0 6px rgba(255, 255, 255, 0.4),
+    0 0 8px rgba(255, 255, 255, 0.2),
+    0 0 14px rgba(255, 255, 255, 0.1);
+    font-size: 150%;
+}
+
+hr.paused-game-stats-hr {
+    width: 75%;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+    margin: 4px 0;
+}
+
+div.game-paused-options {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 40px;
+
+}
+
+div.game-paused-options button {
+    margin: 5px;
+}
+
+button.button-resume:hover {
+    color: #43c743;
+}
+
+button.button-restart:hover {
+    color: #e09102;
+}
+
+button.button-quit:hover {
+    color: #d70d0d;
+}
+
+/*===============================================================*/
+
+
+/*
+===============================================================
+                    GAME OVER MENU */
+
+section#game-over-menu {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: var(--game-over-menu-width);
+    height: var(--game-over-menu-height);
+    display: flex;
+    flex-direction: column;
+}
+
+div.game-over-menu-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.game-over-right-buttons {
+    z-index: 1;
+}
+
+section#game-over-menu h1 {
+    align-self: center;
+    font-size: 50px;
+    padding-top: 15px;
+}
+
+div.game-over-title {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 5px;
+}
+
+hr#game-over-hr {
+    align-self: center;
+    width: 50%;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+
+div.score-container {
+    margin-top: 40px;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+div.score {
+    width: 90%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(0, 0, 0, 0.6),
+    0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: stretch;
+    align-items: center;
+    padding: 12px;
+}
+
+hr.game-over-stats-hr {
+    align-self: center;
+    width: 75%;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+
+div.game-over-options {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.game-over-points,
+div.game-over-missed-hooks,
+div.game-over-time {
+    height: 80%;
+    border: 2px solid silver;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 110%;
+    transition: font-size 0.1s;
+}
+
+div.game-over-missed-hooks {
+    font-size: 110%;
+}
+
+div.game-over-points:hover,
+div.game-over-missed-hooks:hover,
+div.game-over-time:hover {
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.6),
+    0 0 6px rgba(255, 255, 255, 0.4),
+    0 0 8px rgba(255, 255, 255, 0.2),
+    0 0 14px rgba(255, 255, 255, 0.1);
+    font-size: 115%;
+}
+
+div.game-over-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+div.game-over-options button {
+    margin: 5px;
+}
+
+button.button-polygon-3 {
+    width: var(--button-polygon-3-width);
+    height: var(--button-polygon-3-height);
+    font-family: var(--in-menu-font);
+}
+
+/*===============================================================*/
+
+
+/*
+===============================================================
+                     LEADERBOARD */
+section#leaderboard {
+    display: flex;
+    flex-direction: column;
+}
+
+div#leaderboard-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 250%;
+    margin-top: 40px;
+}
+
+hr#leaderboard-hr {
+    width: 75%;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+
+div.leaderboard-container {
+    margin-top: 20px;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+
+}
+
+div.leaderboard-table {
+    width: 75%;
+    flex-grow: 1;
+    background-color: silver;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid lightgray;
+    overflow: scroll;
+}
+
+div.leaderboard-item {
+    width: 98%;
+    height: 60px;
+    margin-top: 7px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+div.leaderboard-item:hover {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(0, 0, 0, 0.6),
+    0 0 6px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+div.leaderboard-item div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 140%;
+    font-family: "Times New Roman", serif;
+}
+
+div.leaderboard-item:last-child {
+    margin-bottom: 7px;
+}
+
+div.leaderboard-number {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 20px 0 0 20px;
+}
+
+div.leaderboard-number-circle {
+    width: 80px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 1);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.6),
+    0 0 6px rgba(255, 255, 255, 0.4),
+    0 0 8px rgba(255, 255, 255, 0.2),
+    0 0 14px rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+}
+
+div.leaderboard-name {
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+div.leaderboard-score {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0 20px 20px 0;
+}
+
+/*===============================================================*/
+
+
+/*
+===============================================================
+                     CHANGE CHARACTER */
+section#change-character {
+    display: flex;
+    flex-direction: column;
+}
+
+div#change-character-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 250%;
+    margin-top: 40px;
+}
+
+hr#change-character-hr {
+    width: 75%;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+
+div.change-character-container {
+    width: 100%;
+    flex-grow: 1;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+}
+
+div.change-character-options {
+    width: 95%;
+    flex-grow: 1;
+    background-color: silver;
+    border-radius: 20px 20px 0 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    row-gap: 15px;
+    padding: 10px;
+    overflow: scroll;
+}
+
+label.character-image {
+    width: 220px;
+    height: 220px;
+    border-radius: 20px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),
+    0 0 4px rgba(0, 0, 0, 0.6),
+    0 0 6px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+input[name="character"]:hover + label.character-image {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(255, 255, 255, 0.9),
+    0 0 6px rgba(255, 255, 255, 0.6),
+    0 0 8px rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 0, 0, 0.2),
+    0 0 24px rgba(0, 0, 0, 0.1);
+}
+
+input[name="character"]:checked + label.character-image {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(217, 0, 217, 0.9),
+    0 0 6px rgba(217, 0, 217, 0.6),
+    0 0 8px rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 0, 0, 0.2),
+    0 0 24px rgba(0, 0, 0, 0.1);
+}
+
+input[name="character"] {
+    display: none;
+}
+
+label.character-image span {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-items: center;
+    align-content: center;
+    width: 100%;
+    flex-grow: 1;
+}
+
+label.character-image p {
+    text-align: center;
+    color: black;
+    font-size: 140%;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+span#harry-potter-character {
+    background-image: url("../../Images/Harry.svg");
+}
+
+
+/*===============================================================*/
+
+
+/*
+===============================================================
+                     SETTINGS MENU */
+
+/*===============================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

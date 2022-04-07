@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Game</title>
+</head>
+
+<body>
+<audio id="mainTheme" src="../../Sounds-and-Music/hpmusic.mp3"></audio>
+<audio id="gameMusic" src="../../Sounds-and-Music/game-music.wav"></audio>
+<audio id="fly-up-sound" src="../../Sounds-and-Music/wind-blow.wav"></audio>
+<audio id="knock-sound" src="../../Sounds-and-Music/wood-hit.wav"></audio>
+<audio id="click-sound" src="../../Sounds-and-Music/click.wav"></audio>
+<audio id="cink-sound" src="../../Sounds-and-Music/cink.mp3"></audio>
+
+<div class="main-container">
+
+    <!--
+        ===============================================================
+                               GAME -->
+    <canvas>
+    </canvas>
+    <!--===============================================================-->
+
+
+    <div class="container">
+
+        <!--
+        ===============================================================
+                               MAIN MENU -->
+        <section id="main-menu" class="menu" hidden>
+            <div class="menu-top">
+                <div class="left-buttons">
+                    <button type="button" class="button-cube button-help">
+                        <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
+                    </button>
+                </div>
+                <div class="right-buttons">
+                    <button class="button-cube button-sound">
+                        <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                    </button>
+                    <button id="msc" class="button-cube button-music">
+                        <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                    </button>
+                    <button class="button-cube button-settings">
+                        <span class="icon-in-button-cube"><ion-icon name="logo-github"></ion-icon></span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="title">
+                <h1 id="harry-potter">Flappy Wizard - Inspired by Harry Potter</h1>
+                <p>
+                    <q>We are only as strong as we are united, as weak as we are divided.</q>
+                    <br>
+                    <small>– Albus Dumbledore, Harry Potter and the Goblet of Fire, Chapter 37</small>
+                </p>
+            </div>
+
+            <div class="options">
+                <hr id="main-menu-hr">
+                <h2>Choose the game difficulty:</h2>
+                <div class="game-difficulty-buttons">
+                    <input type="radio" id="radiobutton-easy" name="game-difficulty"
+                           value="Easy">
+                    <label class="button-easy" for="radiobutton-easy">Easy</label>
+
+                    <input type="radio" id="radiobutton-medium" name="game-difficulty"
+                           value="Medium" checked>
+                    <label class="button-medium" for="radiobutton-medium">Medium</label>
+
+                    <input type="radio" id="radiobutton-hard" name="game-difficulty"
+                           value="Hard">
+                    <label class="button-hard" for="radiobutton-hard">Hard</label>
+
+                    <input type="radio" id="radiobutton-insane" name="game-difficulty"
+                           value="Insane">
+                    <label class="button-insane" for="radiobutton-insane">Insane</label>
+                </div>
+
+                <div class="game-options">
+                    <button class="button-polygon-2 button-play">
+                        <span class="text-in-button-polygon-2">Play</span>
+                    </button>
+                    <button class="button-polygon-2 button-leaderboard">
+                        <span class="text-in-button-polygon-2">Leaderboard</span>
+                    </button>
+                    <button class="button-polygon-2 button-change-character">
+                        <span class="text-in-button-polygon-2">Change character</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!--===============================================================-->
+
+
+        <!--
+        ===============================================================
+                               SETTINGS -->
+        <!--
+        <section id="settings" class="menu" hidden>
+            <div class="menu-top">
+                <div class="left-buttons">
+                    <button type="button" class="button-cube button-help">
+                        <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
+                    </button>
+                </div>
+                <div class="right-buttons">
+                    <button class="button-cube button-close">
+                        <span class="icon-in-button-cube"><ion-icon name="close-outline"></ion-icon></span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <button class="button-cube button-sound">
+                    <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                </button>
+                <button class="button-cube button-music">
+                    <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                </button>
+            </div>
+        </section>
+        -->
+        <!--===============================================================-->
+
+
+        <!--
+        ===============================================================
+                               GAME MENU -->
+        <section id="game-menu" class="menu" hidden>
+            <div class="game-paused-menu-top">
+                <button type="button" class="button-cube button-help">
+                    <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
+                </button>
+                <div class="paused-title">
+                    <h1>Game Paused</h1>
+                </div>
+                <hr id="game-menu-hr">
+            </div>
+
+            <div class="game-paused-settings">
+                <div class="game-paused-sounds-music">
+                    <div id="game-paused-sound">
+                        <button class="button-cube button-sound">
+                            <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                        </button>
+                        <div class="slide-container">
+                            <input type="range" min="1" max="100" class="sound-slider">
+                        </div>
+                    </div>
+                    <div id="game-paused-music">
+                        <button class="button-cube button-music">
+                            <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                        </button>
+                        <div class="slide-container">
+                            <input type="range" min="1" max="100" class="music-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-stats">
+                <h2>Game Stats:</h2>
+                <div class="game-stats-table">
+                    <div class="points">
+                        <h3>Points:</h3>
+                        <hr class="paused-game-stats-hr">
+                        <p>- 21 -</p>
+                    </div>
+                    <div class="missed-hooks">
+                        <h3>Missed Hooks:</h3>
+                        <hr class="paused-game-stats-hr">
+                        <p>- 21 -</p>
+                    </div>
+                    <div class="time">
+                        <h3>Time:</h3>
+                        <hr class="paused-game-stats-hr">
+                        <p>00:00:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-paused-options">
+                <button class="button-polygon-2 button-resume">
+                    <span class="text-in-button-polygon-2">Resume</span>
+                </button>
+                <button class="button-polygon-2 button-restart">
+                    <span class="text-in-button-polygon-2">Restart</span>
+                </button>
+                <button class="button-polygon-2 button-quit">
+                    <span class="text-in-button-polygon-2">Quit</span>
+                </button>
+            </div>
+        </section>
+        <!--===============================================================-->
+
+
+        <!--
+        ===============================================================
+                               GAME OVER MENU -->
+        <section id="game-over-menu" class="menu" hidden>
+            <div class="game-over-menu-top">
+                <button type="button" class="button-cube button-help">
+                    <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
+                </button>
+                <div class="game-over-right-buttons">
+                    <button class="button-cube button-sound">
+                        <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                    </button>
+                    <button class="button-cube button-music">
+                        <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                    </button>
+                </div>
+                <div class="game-over-title">
+                    <h1>Game Over</h1>
+                </div>
+            </div>
+
+            <hr id="game-over-hr">
+
+            <div class="score-container">
+                <div class="score">
+                    <div class="game-over-points">
+                        <h3>Points:</h3>
+                        <hr class="paused-game-stats-hr">
+                        <p>- 21 -</p>
+                    </div>
+                    <div class="game-over-missed-hooks">
+                        <h3>Missed Hooks:</h3>
+                        <hr class="paused-game-stats-hr">
+                        <p>- 21 -</p>
+                    </div>
+                    <div class="game-over-time">
+                        <h3>Time:</h3>
+                        <hr class="paused-game-stats-hr">
+                        <p>00:00:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-over-options">
+                <button class="button-polygon-3 button-restart">
+                    <span class="text-in-button-polygon-2">Try again!</span>
+                </button>
+                <button class="button-polygon-3 button-quit">
+                    <span class="text-in-button-polygon-2">Quit</span>
+                </button>
+            </div>
+        </section>
+        <!--===============================================================-->
+
+
+        <!--
+        ===============================================================
+                               LEADERBOARD -->
+        <section id="leaderboard" class="menu">
+            <div class="menu-top">
+                <div class="left-buttons">
+                    <button type="button" class="button-cube button-help">
+                        <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
+                    </button>
+                </div>
+                <div class="right-buttons">
+                    <button class="button-cube button-sound">
+                        <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                    </button>
+                    <button class="button-cube button-music">
+                        <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                    </button>
+                    <button class="button-cube button-home">
+                        <span class="icon-in-button-cube"><ion-icon name="home"></ion-icon></span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="leaderboard-title">
+                <h1>Leaderboard</h1>
+                <hr id="leaderboard-hr">
+            </div>
+
+            <div class="leaderboard-container">
+                <div class="leaderboard-table">
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">1.</div>
+                        </div>
+                        <div class="leaderboard-name">Harry Potter</div>
+                        <div class="leaderboard-score">68</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">2.</div>
+                        </div>
+                        <div class="leaderboard-name">Albus Percival Wulfric Brian Dumbledore</div>
+                        <div class="leaderboard-score">65</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">3.</div>
+                        </div>
+                        <div class="leaderboard-name">Hermione Granger</div>
+                        <div class="leaderboard-score">59</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">4.</div>
+                        </div>
+                        <div class="leaderboard-name">Ron Weasley</div>
+                        <div class="leaderboard-score">57</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">5.</div>
+                        </div>
+                        <div class="leaderboard-name">Severus Snape</div>
+                        <div class="leaderboard-score">53</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">6.</div>
+                        </div>
+                        <div class="leaderboard-name">Lord Voldemort</div>
+                        <div class="leaderboard-score">52</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">7.</div>
+                        </div>
+                        <div class="leaderboard-name">Rubeus Hagrid</div>
+                        <div class="leaderboard-score">45</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">8.</div>
+                        </div>
+                        <div class="leaderboard-name">Bellatrix Lestrange</div>
+                        <div class="leaderboard-score">44</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">9.</div>
+                        </div>
+                        <div class="leaderboard-name">Sirius Black</div>
+                        <div class="leaderboard-score">41</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">10.</div>
+                        </div>
+                        <div class="leaderboard-name">Ginny Weasley</div>
+                        <div class="leaderboard-score">38</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">11.</div>
+                        </div>
+                        <div class="leaderboard-name">Neville Longbottom</div>
+                        <div class="leaderboard-score">33</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">12.</div>
+                        </div>
+                        <div class="leaderboard-name">Draco Malfoy</div>
+                        <div class="leaderboard-score">27</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">13.</div>
+                        </div>
+                        <div class="leaderboard-name">Luna Lovegood</div>
+                        <div class="leaderboard-score">22</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">14.</div>
+                        </div>
+                        <div class="leaderboard-name">Minerva McGonagall</div>
+                        <div class="leaderboard-score">19</div>
+                    </div>
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-number">
+                            <div class="leaderboard-number-circle">15.</div>
+                        </div>
+                        <div class="leaderboard-name">Gellert Grindelwald</div>
+                        <div class="leaderboard-score">14</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--===============================================================-->
+
+
+        <!--
+        ===============================================================
+                               CHANGE CHARACTER MENU -->
+        <section id="change-character" class="menu" hidden>
+            <div class="menu-top">
+                <div class="left-buttons">
+                    <button type="button" class="button-cube button-help">
+                        <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
+                    </button>
+                </div>
+                <div class="right-buttons">
+                    <button class="button-cube button-sound">
+                        <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                    </button>
+                    <button class="button-cube button-music">
+                        <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                    </button>
+                    <button class="button-cube button-home">
+                        <span class="icon-in-button-cube"><ion-icon name="home"></ion-icon></span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="change-character-title">
+                <h1>Change Character</h1>
+                <hr id="change-character-hr">
+            </div>
+
+            <div class="change-character-container">
+                <div class="change-character-options">
+                    <input type="radio" id="radiobutton-harry-potter" value="Harry-Potter" name="character" checked>
+                    <label class="character-image" for="radiobutton-harry-potter">
+                        <p>Harry Potter</p>
+                        <span id="harry-potter-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-ron-weasley" value="Ron-Weasley" name="character">
+                    <label class="character-image" for="radiobutton-ron-weasley">
+                        <p>Ron Weasley</p>
+                        <span id="ron-weasley-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-hermione-granger" value="Hermione-Granger" name="character">
+                    <label class="character-image" for="radiobutton-hermione-granger">
+                        <p>Hermione Granger</p>
+                        <span id="hermione-granger-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-dumbledore" value="Dumbledore" name="character">
+                    <label class="character-image" for="radiobutton-dumbledore">
+                        <p>Albus Dumbledore</p>
+                        <span id="dumbledore-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-voldemort" value="Voldemort" name="character">
+                    <label class="character-image" for="radiobutton-voldemort">
+                        <p>Lord Voldemort</p>
+                        <span id="voldemort-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-severus-snape" value="Severus-Snape" name="character">
+                    <label class="character-image" for="radiobutton-severus-snape">
+                        <p>Severus Snape</p>
+                        <span id="severus-snape-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-rubeus-hagrid" value="Rubeus-Hagrid" name="character">
+                    <label class="character-image" for="radiobutton-rubeus-hagrid">
+                        <p>Rubeus Hagrid</p>
+                        <span id="rubeus-hagrid-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-bellatrix" value="Bellatrix" name="character">
+                    <label class="character-image" for="radiobutton-bellatrix">
+                        <p>Bellatrix Lestrange</p>
+                        <span id="bellatrix-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-sirius-black" value="Sirius-Black" name="character">
+                    <label class="character-image" for="radiobutton-sirius-black">
+                        <p>Sirius Black</p>
+                        <span id="sirius-black-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-ginny-weasley" value="Ginny-Weasley" name="character">
+                    <label class="character-image" for="radiobutton-ginny-weasley">
+                        <p>Ginny Weasley</p>
+                        <span id="ginny-weasley-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-neville-longbottom" value="Neville-Longbottom" name="character">
+                    <label class="character-image" for="radiobutton-neville-longbottom">
+                        <p>Neville Longbottom</p>
+                        <span id="neville-longbottom-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-draco-malfoy" value="Draco-Malfoy" name="character">
+                    <label class="character-image" for="radiobutton-draco-malfoy">
+                        <p>Draco Malfoy</p>
+                        <span id="draco-malfoy-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-luna-lovegood" value="Luna-Lovegood" name="character">
+                    <label class="character-image" for="radiobutton-luna-lovegood">
+                        <p>Luna Lovegood</p>
+                        <span id="luna-lovegood-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-mcgonagall" value="Minerva-McGonagall" name="character">
+                    <label class="character-image" for="radiobutton-mcgonagall">
+                        <p>Minerva McGonagall</p>
+                        <span id="mcgonagall-character"></span>
+                    </label>
+
+                    <input type="radio" id="radiobutton-grindelwald" value="Gellert-Grindelwald" name="character">
+                    <label class="character-image" for="radiobutton-grindelwald">
+                        <p>Gellert Grindelwald</p>
+                        <span id="grindelwald-character"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+        <!--===============================================================-->
+
+
+        <!--
+        ===============================================================
+                               INFO MENU -->
+        <section class="menu" hidden>
+            <div class="menu-top">
+                <div class="left-buttons">
+                    <button type="button" class="button-cube button-help">
+                        <span class="icon-in-button-cube"><ion-icon name="arrow-undo"></ion-icon></span>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+        <!--===============================================================-->
+    </div>
+
+
+</div>
+
+
+<script>
+    let theme = document.getElementById("mainTheme");
+    let gameMusic = document.getElementById("gameMusic");
+    let buttonClickedSound = document.getElementById("click-sound");
+
+    let buttonsPlayMusic = document.getElementsByClassName("button-music");
+
+    let buttons = document.getElementsByTagName("button");
+    let radioButtons = document.getElementsByClassName("radiobutton-polygon-1");
+
+    for (let i in buttons) {
+        buttons[i].onclick = function () {
+            buttonClickedSound.play();
+        }
+    }
+
+    for (let i in radioButtons) {
+        radioButtons[i].onclick = function () {
+            buttonClickedSound.play();
+        }
+    }
+
+    for (let i in buttonsPlayMusic) {
+        buttonsPlayMusic[i].onclick = function () {
+            theme.play();
+        }
+    }
+</script>
+
+<!-- TOTO SA NAUCIT A POCHOPIT -->
+<script>
+    const rangeInputs = document.querySelectorAll('input[type="range"]')
+    const numberInput = document.querySelector('input[type="number"]')
+
+    function handleInputChange(e) {
+        let target = e.target
+        if (e.target.type !== 'range') {
+            target = document.getElementById('range')
+        }
+        const min = target.min
+        const max = target.max
+        const val = target.value
+
+        target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+    }
+
+    rangeInputs.forEach(input => {
+        input.addEventListener('input', handleInputChange)
+    })
+
+    numberInput.addEventListener('input', handleInputChange)
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
