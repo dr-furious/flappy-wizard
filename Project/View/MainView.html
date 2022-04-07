@@ -33,8 +33,46 @@
 
         <!--
         ===============================================================
+                               GAME MENU -->
+        <div id="in-game-menu-top" hidden>
+            <div class="left-buttons">
+                <button type="button" class="button-cube button-help">
+                    <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
+                </button>
+            </div>
+
+            <div id="in-game-stats">
+                <div class="in-game-points">
+                    <h3>Points:</h3>
+                    <p class="scored-points">21</p>
+                </div>
+                <div class="in-game-time">
+                    <h3>Time:</h3>
+                    <p class="time-from-start">00:00:00</p>
+                </div>
+            </div>
+
+            <div class="right-buttons">
+                <button class="button-cube button-sound">
+                    <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                </button>
+                <button class="button-cube button-music">
+                    <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                </button>
+                <a href="https://github.com/furious-student" target="_blank">
+                    <button class="button-cube button-settings">
+                        <span class="icon-in-button-cube"><ion-icon name="pause"></ion-icon></span>
+                    </button>
+                </a>
+            </div>
+        </div>
+        <!--===============================================================-->
+
+
+        <!--
+        ===============================================================
                                MAIN MENU -->
-        <section id="main-menu" class="menu">
+        <section id="main-menu" class="menu" hidden>
             <div class="menu-top">
                 <div class="left-buttons">
                     <button type="button" class="button-cube button-help">
@@ -45,7 +83,7 @@
                     <button class="button-cube button-sound">
                         <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
                     </button>
-                    <button id="msc" class="button-cube button-music">
+                    <button class="button-cube button-music">
                         <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
                     </button>
                     <a href="https://github.com/furious-student" target="_blank">
@@ -135,7 +173,7 @@
 
         <!--
         ===============================================================
-                               GAME MENU -->
+                               GAME PAUSED MENU -->
         <section id="game-menu" class="menu" hidden>
             <div class="game-paused-menu-top">
                 <button type="button" class="button-cube button-help">
@@ -232,7 +270,7 @@
                     <div class="game-over-points">
                         <h3>Points:</h3>
                         <hr class="paused-game-stats-hr">
-                        <p>- 21 -</p>
+                        <p class="scored-points">- 21 -</p>
                     </div>
                     <div class="game-over-missed-hooks">
                         <h3>Missed Hooks:</h3>
@@ -242,7 +280,7 @@
                     <div class="game-over-time">
                         <h3>Time:</h3>
                         <hr class="paused-game-stats-hr">
-                        <p>00:00:00</p>
+                        <p class="time-from-start">00:00:00</p>
                     </div>
                 </div>
             </div>
@@ -528,12 +566,83 @@
         <!--
         ===============================================================
                                INFO MENU -->
-        <section class="menu" hidden>
+        <section id="info" class="menu">
             <div class="menu-top">
                 <div class="left-buttons">
                     <button type="button" class="button-cube button-help">
                         <span class="icon-in-button-cube"><ion-icon name="arrow-undo"></ion-icon></span>
                     </button>
+                </div>
+                <div id="info-title">
+                    <h1>Info - Manual</h1>
+                </div>
+            </div>
+
+            <div id="info-hr-container">
+                <hr id="info-hr">
+            </div>
+
+            <div id="info-container">
+                <div id="info-text">
+                    <div class="info-item">
+                        <h3>About</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolorem doloribus eligendi
+                            explicabo fugiat laboriosam laudantium nostrum, omnis perferendis perspiciatis placeat quasi
+                            qui ratione saepe sint voluptas voluptatibus. Asperiores corporis, debitis dicta dolor,
+                            dolore dolorum error et labore modi molestias nesciunt officiis qui reiciendis ullam
+                            voluptatibus? A, ab aliquid doloremque impedit iure placeat quam quibusdam veniam veritatis
+                            voluptates. Assumenda atque, consequuntur cum, delectus deleniti dolor illo iusto minus
+                            nostrum, omnis perferendis quos rerum ullam? Aliquid, rerum vero? Alias aliquid animi
+                            assumenda cum dolor doloribus et eveniet, facilis fuga, fugiat harum id maxime mollitia
+                            neque nihil perspiciatis qui ratione recusandae repellat reprehenderit similique velit
+                            voluptatem. Cum labore modi saepe velit? Ad adipisci cum delectus eos est fugiat illo iure
+                            laborum nam natus, nobis numquam quidem recusandae repudiandae sit soluta totam ullam unde
+                            ut voluptatum! Amet, aut consectetur debitis deserunt doloribus earum error facilis in
+                            nobis, odit placeat quam reiciendis saepe? Accusantium aliquam commodi harum ipsam neque non
+                            officia, officiis perspiciatis? Accusamus ad atque autem eius ipsum, nemo nostrum odit sint
+                            ut voluptatem? Accusantium, aut autem dicta dolorem eligendi error eum ex expedita explicabo
+                            laboriosam minus nam natus nihil nobis praesentium provident quae quisquam ratione repellat
+                            sunt tempore, totam, ut voluptate voluptatum.</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>How to play</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad consectetur distinctio ea ipsa
+                            itaque iusto magni quos sapiente sequi vel. Deserunt dolorem dolores eligendi hic illo ipsa
+                            minima molestiae mollitia quod soluta? Ab aliquam, amet blanditiis dicta dolores doloribus
+                            dolorum ea, eius eos eveniet incidunt ipsum iure qui? Alias atque blanditiis cumque, eveniet
+                            illo laboriosam maxime mollitia nam neque non porro, quam quos sapiente soluta suscipit
+                            unde, ut. Accusantium adipisci architecto atque blanditiis corporis cupiditate dignissimos
+                            distinctio dolor dolore dolores ea et eveniet fuga id in ipsum minima modi molestias nihil
+                            non, obcaecati quam quia repellendus repudiandae tempore ullam vel.</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Controls</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab adipisci architecto consectetur
+                            dolor doloribus ducimus eaque et exercitationem fugit ipsum magnam minima nihil quod
+                            reiciendis, sapiente? Animi at autem eligendi eos magnam, nemo, nobis omnis optio quia rerum
+                            tenetur velit! Commodi distinctio perferendis quidem recusandae rem repellendus sint
+                            temporibus veritatis.</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Where to donate</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequatur hic
+                            inventore ipsa laudantium quae sunt tempora. Architecto beatae blanditiis dignissimos, dolor
+                            ea enim et, fugit id maxime minima nemo nisi pariatur perferendis provident sint ullam
+                            veritatis vero? Corporis quod, similique! Cupiditate ea illo laboriosam molestiae nulla quae
+                            quos. Illum!</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Credits</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet assumenda, atque
+                            deserunt dicta error fugiat illum iste labore magnam nam, nulla veniam? Aliquam architecto
+                            assumenda culpa deleniti dignissimos excepturi harum, hic ipsa laboriosam magnam minus
+                            molestiae molestias neque nesciunt nobis nulla obcaecati odio officia pariatur praesentium
+                            provident quam quas quia quidem, ratione reiciendis rem repellat reprehenderit sapiente sed
+                            similique soluta sunt voluptatibus. Accusantium aliquid assumenda at cumque delectus
+                            distinctio dolorem dolores eaque earum eligendi eum excepturi expedita fuga impedit ipsam
+                            iste labore libero minus molestias nisi odio officiis quidem quisquam ratione repellat
+                            repudiandae saepe, sint soluta tempore vel, vitae!</p>
+                    </div>
                 </div>
             </div>
 

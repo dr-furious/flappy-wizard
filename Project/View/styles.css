@@ -143,6 +143,60 @@ input[type="radio"]:hover + label {
 
 /*
 ===============================================================
+                    GAME MENU */
+div#in-game-menu-top {
+    width: 100%;
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+div#in-game-stats {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+
+div.in-game-points,
+div.in-game-time {
+    width: 20%;
+    align-self: center;
+    font-size: 150%;
+    display: flex;
+    justify-content: space-evenly;
+    color: black;
+    font-family: "Times New Roman", serif;
+}
+
+div.in-game-points p,
+div.in-game-time p {
+    padding: 4px 0 0 0;
+    align-items: center;
+    font-weight: bold;
+}
+
+div#in-game-menu-top button {
+    border-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+div#in-game-menu-top button:hover {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1),
+    0 0 4px rgba(217, 0, 217, 0.9),
+    0 0 6px rgba(217, 0, 217, 0.6),
+    0 0 8px rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 0, 0, 0.2),
+    0 0 24px rgba(0, 0, 0, 0.1);
+}
+
+/*===============================================================*/
+
+
+/*
+===============================================================
                     MAIN MENU */
 div.menu-top {
     display: flex;
@@ -759,7 +813,6 @@ div.leaderboard-table {
     flex-direction: column;
     align-items: center;
     border: 2px solid lightgray;
-    overflow: scroll;
 }
 
 div.leaderboard-item {
@@ -932,13 +985,80 @@ span#harry-potter-character {
     background-image: url("../../Images/Harry.svg");
 }
 
-
 /*===============================================================*/
 
 
 /*
 ===============================================================
-                     SETTINGS MENU */
+                     INFO MENU */
+section#info {
+    display: flex;
+    flex-direction: column;
+}
+
+div#info-title {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div#info-title h1 {
+    font-size: 300%;
+}
+
+div#info-hr-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+hr#info-hr {
+    width: 50%;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+
+}
+
+div#info-container {
+    margin-top: 40px;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+div#info-text {
+    width: 75%;
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.info-item {
+    font-family: "Times New Roman", serif;
+    font-size: 120%;
+    text-align: justify;
+    padding: 10px;
+    width: 90%;
+    height: auto;
+    margin-top: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+div.info-item:nth-child(2n+1) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 /*===============================================================*/
 
