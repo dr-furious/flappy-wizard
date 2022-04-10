@@ -13,18 +13,20 @@
 
 <body>
 <audio id="mainTheme" src="../../Sounds-and-Music/hpmusic.mp3"></audio>
-<audio id="gameMusic" src="../../Sounds-and-Music/game-music.wav"></audio>
+<audio id="gameMusic" src="../../Sounds-and-Music/game-music.wav" loop></audio>
 <audio id="fly-up-sound" src="../../Sounds-and-Music/wind-blow.wav"></audio>
 <audio id="knock-sound" src="../../Sounds-and-Music/wood-hit.wav"></audio>
 <audio id="click-sound" src="../../Sounds-and-Music/click.wav"></audio>
 <audio id="cink-sound" src="../../Sounds-and-Music/cink.mp3"></audio>
+
+<img>
 
 <div class="main-container">
 
     <!--
         ===============================================================
                                GAME -->
-    <canvas>
+    <canvas id="canvas" width="1280" height="720">
     </canvas>
     <!--===============================================================-->
 
@@ -33,12 +35,28 @@
 
         <!--
         ===============================================================
+                               START -->
+        <section id="start-it">
+            <h1>Greetings!</h1>
+            <p>Hello fellow gamer! We are glad to see you here! Now, lets dive together deep into the magic world full
+                of
+                wizards and astounding spells. You may fall into the dust like many had, but you might become glorious
+                undefeated champion!<br><br>Do you think you can make it?</p>
+            <div id="player-name">
+                <label for="hero-name">You play for:</label>
+                <input id="hero-name" type="text" placeholder="Your Hero Name">
+            </div>
+            <button id="button-do-it" type="button" class="button-polygon-3 ">Lets start!</button>
+        </section>
+        <!--===============================================================-->
+
+
+        <!--
+        ===============================================================
                                GAME MENU -->
-        <div id="in-game-menu-top" hidden>
-            <div class="left-buttons">
-                <button type="button" class="button-cube button-help">
-                    <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
-                </button>
+        <section id="in-game-menu-top" hidden>
+            <div id="in-game-player-name-container">
+                <h1 id="in-game-player-name">Player Name</h1>
             </div>
 
             <div id="in-game-stats">
@@ -54,18 +72,19 @@
 
             <div class="right-buttons">
                 <button class="button-cube button-sound">
-                    <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                    <span class="volume-on"><ion-icon name="volume-high"></ion-icon></span>
+                    <span class="volume-off" hidden><ion-icon
+                            name="close-circle-outline"></ion-icon></span>
                 </button>
                 <button class="button-cube button-music">
-                    <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                    <span class="music-on"><ion-icon name="musical-notes"></ion-icon></span>
+                    <span class="music-off" hidden><ion-icon name="close-circle-outline"></ion-icon></span>
                 </button>
-                <a href="https://github.com/furious-student" target="_blank">
-                    <button class="button-cube button-settings">
-                        <span class="icon-in-button-cube"><ion-icon name="pause"></ion-icon></span>
-                    </button>
-                </a>
+                <button id="button-paused" class="button-cube">
+                    <span class="icon-in-button-cube"><ion-icon name="pause"></ion-icon></span>
+                </button>
             </div>
-        </div>
+        </section>
         <!--===============================================================-->
 
 
@@ -73,18 +92,22 @@
         ===============================================================
                                MAIN MENU -->
         <section id="main-menu" class="menu" hidden>
-            <div class="menu-top">
+            <div id="main-menu-top" class="menu-top">
                 <div class="left-buttons">
                     <button type="button" class="button-cube button-help">
                         <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
                     </button>
                 </div>
+
                 <div class="right-buttons">
                     <button class="button-cube button-sound">
-                        <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                        <span class="volume-on"><ion-icon name="volume-high"></ion-icon></span>
+                        <span class="volume-off" hidden><ion-icon
+                                name="close-circle-outline"></ion-icon></span>
                     </button>
                     <button class="button-cube button-music">
-                        <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                        <span class="music-on"><ion-icon name="musical-notes"></ion-icon></span>
+                        <span class="music-off" hidden><ion-icon name="close-circle-outline"></ion-icon></span>
                     </button>
                     <a href="https://github.com/furious-student" target="_blank">
                         <button class="button-cube button-settings">
@@ -105,8 +128,8 @@
 
             <div class="options">
                 <hr id="main-menu-hr">
-                <h2>Choose the game difficulty:</h2>
-                <div class="game-difficulty-buttons">
+                <h2 id="main-menu-options-1">Choose the game difficulty:</h2>
+                <div id="main-menu-options-2" class="game-difficulty-buttons">
                     <input type="radio" id="radiobutton-easy" name="game-difficulty"
                            value="Easy">
                     <label class="button-easy" for="radiobutton-easy">Easy</label>
@@ -124,50 +147,19 @@
                     <label class="button-insane" for="radiobutton-insane">Insane</label>
                 </div>
 
-                <div class="game-options">
-                    <button class="button-polygon-2 button-play">
+                <div id="main-menu-game-options" class="game-options">
+                    <button id="button-play" class="button-polygon-2">
                         <span class="text-in-button-polygon-2">Play</span>
                     </button>
-                    <button class="button-polygon-2 button-leaderboard">
+                    <button id="button-leaderboard" class="button-polygon-2">
                         <span class="text-in-button-polygon-2">Leaderboard</span>
                     </button>
-                    <button class="button-polygon-2 button-change-character">
+                    <button id="button-change-character" class="button-polygon-2">
                         <span class="text-in-button-polygon-2">Change character</span>
                     </button>
                 </div>
             </div>
         </section>
-        <!--===============================================================-->
-
-
-        <!--
-        ===============================================================
-                               SETTINGS -->
-        <!--
-        <section id="settings" class="menu" hidden>
-            <div class="menu-top">
-                <div class="left-buttons">
-                    <button type="button" class="button-cube button-help">
-                        <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
-                    </button>
-                </div>
-                <div class="right-buttons">
-                    <button class="button-cube button-close">
-                        <span class="icon-in-button-cube"><ion-icon name="close-outline"></ion-icon></span>
-                    </button>
-                </div>
-            </div>
-
-            <div>
-                <button class="button-cube button-sound">
-                    <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
-                </button>
-                <button class="button-cube button-music">
-                    <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
-                </button>
-            </div>
-        </section>
-        -->
         <!--===============================================================-->
 
 
@@ -189,7 +181,8 @@
                 <div class="game-paused-sounds-music">
                     <div id="game-paused-sound">
                         <button class="button-cube button-sound">
-                            <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
+                            <span class="volume-on"><ion-icon name="volume-high"></ion-icon></span>
+                            <span class="volume-off" hidden><ion-icon name="close-circle-outline"></ion-icon></span>
                         </button>
                         <div class="slide-container">
                             <input type="range" min="1" max="100" class="sound-slider">
@@ -197,7 +190,8 @@
                     </div>
                     <div id="game-paused-music">
                         <button class="button-cube button-music">
-                            <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
+                            <span class="music-on"><ion-icon name="musical-notes"></ion-icon></span>
+                            <span class="music-off" hidden><ion-icon name="close-circle-outline"></ion-icon></span>
                         </button>
                         <div class="slide-container">
                             <input type="range" min="1" max="100" class="music-slider">
@@ -228,7 +222,7 @@
             </div>
 
             <div class="game-paused-options">
-                <button class="button-polygon-2 button-resume">
+                <button id="button-resume" class="button-polygon-2">
                     <span class="text-in-button-polygon-2">Resume</span>
                 </button>
                 <button class="button-polygon-2 button-restart">
@@ -251,12 +245,17 @@
                     <span class="icon-in-button-cube"><ion-icon name="help-outline"></ion-icon></span>
                 </button>
                 <div class="game-over-right-buttons">
-                    <button class="button-cube button-sound">
-                        <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
-                    </button>
-                    <button class="button-cube button-music">
-                        <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
-                    </button>
+                    <div class="right-buttons">
+                        <button class="button-cube button-sound">
+                            <span class="volume-on"><ion-icon name="volume-high"></ion-icon></span>
+                            <span class="volume-off" hidden><ion-icon
+                                    name="close-circle-outline"></ion-icon></span>
+                        </button>
+                        <button class="button-cube button-music">
+                            <span class="music-on"><ion-icon name="musical-notes"></ion-icon></span>
+                            <span class="music-off" hidden><ion-icon name="close-circle-outline"></ion-icon></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="game-over-title">
                     <h1>Game Over</h1>
@@ -308,12 +307,17 @@
                     </button>
                 </div>
                 <div class="right-buttons">
-                    <button class="button-cube button-sound">
-                        <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
-                    </button>
-                    <button class="button-cube button-music">
-                        <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
-                    </button>
+                    <div class="right-buttons">
+                        <button class="button-cube button-sound">
+                            <span class="volume-on"><ion-icon name="volume-high"></ion-icon></span>
+                            <span class="volume-off" hidden><ion-icon
+                                    name="close-circle-outline"></ion-icon></span>
+                        </button>
+                        <button class="button-cube button-music">
+                            <span class="music-on"><ion-icon name="musical-notes"></ion-icon></span>
+                            <span class="music-off" hidden><ion-icon name="close-circle-outline"></ion-icon></span>
+                        </button>
+                    </div>
                     <button class="button-cube button-home">
                         <span class="icon-in-button-cube"><ion-icon name="home"></ion-icon></span>
                     </button>
@@ -449,12 +453,17 @@
                     </button>
                 </div>
                 <div class="right-buttons">
-                    <button class="button-cube button-sound">
-                        <span class="icon-in-button-cube"><ion-icon name="volume-high"></ion-icon></span>
-                    </button>
-                    <button class="button-cube button-music">
-                        <span class="icon-in-button-cube"><ion-icon name="musical-notes"></ion-icon></span>
-                    </button>
+                    <div class="right-buttons">
+                        <button class="button-cube button-sound">
+                            <span class="volume-on"><ion-icon name="volume-high"></ion-icon></span>
+                            <span class="volume-off" hidden><ion-icon
+                                    name="close-circle-outline"></ion-icon></span>
+                        </button>
+                        <button class="button-cube button-music">
+                            <span class="music-on"><ion-icon name="musical-notes"></ion-icon></span>
+                            <span class="music-off" hidden><ion-icon name="close-circle-outline"></ion-icon></span>
+                        </button>
+                    </div>
                     <button class="button-cube button-home">
                         <span class="icon-in-button-cube"><ion-icon name="home"></ion-icon></span>
                     </button>
@@ -566,10 +575,10 @@
         <!--
         ===============================================================
                                INFO MENU -->
-        <section id="info" class="menu">
+        <section id="info" class="menu" hidden>
             <div class="menu-top">
                 <div class="left-buttons">
-                    <button type="button" class="button-cube button-help">
+                    <button type="button" id="button-return" class="button-cube">
                         <span class="icon-in-button-cube"><ion-icon name="arrow-undo"></ion-icon></span>
                     </button>
                 </div>
@@ -653,40 +662,9 @@
 
 </div>
 
-
-<script>
-    let theme = document.getElementById("mainTheme");
-    let gameMusic = document.getElementById("gameMusic");
-    let buttonClickedSound = document.getElementById("click-sound");
-
-    let buttonsPlayMusic = document.getElementsByClassName("button-music");
-
-    let buttons = document.getElementsByTagName("button");
-    let radioButtons = document.getElementsByClassName("radiobutton-polygon-1");
-
-    for (let i in buttons) {
-        buttons[i].onclick = function () {
-            buttonClickedSound.play();
-        }
-    }
-
-    for (let i in radioButtons) {
-        radioButtons[i].onclick = function () {
-            buttonClickedSound.play();
-        }
-    }
-
-    for (let i in buttonsPlayMusic) {
-        buttonsPlayMusic[i].onclick = function () {
-            theme.play();
-        }
-    }
-</script>
-
 <!-- TOTO SA NAUCIT A POCHOPIT -->
 <script>
     const rangeInputs = document.querySelectorAll('input[type="range"]')
-    const numberInput = document.querySelector('input[type="number"]')
 
     function handleInputChange(e) {
         let target = e.target
@@ -697,14 +675,48 @@
         const max = target.max
         const val = target.value
 
-        target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+        target.style.backgroundSize = (val - min) * 100 / (max - min) + "% 100%";
     }
 
     rangeInputs.forEach(input => {
         input.addEventListener('input', handleInputChange)
-    })
+    });
+</script>
 
-    numberInput.addEventListener('input', handleInputChange)
+<script src="../Controller/GameButton.js"></script>
+<script src="../Controller/SwitchMenusButton.js"></script>
+<script src="../Controller/SoundButton.js"></script>
+<script src="../Controller/LoadGameButton.js"></script>
+<script>
+    let musics = [];
+    musics.push(document.getElementById("mainTheme"));
+    musics.push(document.getElementById("gameMusic"));
+    let volumes = [];
+    volumes.push(document.getElementById("fly-up-sound"));
+    volumes.push(document.getElementById("knock-sound"));
+    volumes.push(document.getElementById("click-sound"));
+    volumes.push(document.getElementById("cink-sound"));
+
+    let buttons = document.querySelectorAll("button");
+    let buttonStart = new LoadGameButton(document.getElementById("button-do-it"), volumes[2], document.getElementById("start-it"), document.getElementById("main-menu"),
+        musics[0], musics[1], null);
+    let buttonsMusic = document.getElementsByClassName("button-music");
+    let buttonsSound = document.getElementsByClassName("button-sound");
+
+
+    let spanMusicMuted = document.getElementsByClassName("music-off");
+    let spanVolumeMuted = document.getElementsByClassName("volume-off");
+
+
+    buttonStart.onclick();
+
+    for (let i = 0; i < buttonsMusic.length; i++) {
+        let buttonMusic = new SoundButton(buttonsMusic[i], volumes[2], musics, spanMusicMuted[i]);
+        let buttonSound = new SoundButton(buttonsSound[i], volumes[2], volumes, spanVolumeMuted[i]);
+        buttonMusic.onclick();
+        buttonSound.onclick();
+    }
+
 </script>
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

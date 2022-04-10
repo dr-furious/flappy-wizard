@@ -87,6 +87,7 @@ section.menu {
     height: var(--menus-height);
 }
 
+
 button {
     color: silver;
     background: rgba(100, 100, 100, 0.2);
@@ -141,21 +142,227 @@ input[type="radio"]:hover + label {
     cursor: pointer;
 }
 
+button.button-sound,
+button.button-music {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+span.volume-on,
+span.music-on {
+    margin-top: 10px;
+    justify-self: center;
+    align-self: center;
+    font-size: 50px;
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+}
+
+span.volume-off,
+span.music-off {
+    font-size: 250%;
+    color: rgba(255, 0, 0, 0.75);
+    --ionicon-stroke-width: 60px;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+/*
+===============================================================
+                    SECTION ANIMATIONS
+
+div#title,
+section#main-menu,
+div#main-menu-top,
+hr#main-menu-hr,
+h2#main-menu-options-1,
+div#main-menu-options-2,
+div#main-menu-game-options {
+    animation-iteration-count: 1;
+}
+
+div#title,
+section#main-menu {
+    animation-duration: 6s;
+    animation-name: appear-main-menu;
+    -moz-animation-iteration-count: 1;
+}
+
+@keyframes appear-main-menu {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
+div#main-menu-top {
+    animation-duration: 9s;
+    animation-name: appear-main-menu-top;
+}
+
+@keyframes appear-main-menu-top {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+hr#main-menu-hr {
+    animation-duration: 12s;
+    animation-name: appear-main-menu-title;
+}
+
+@keyframes appear-main-menu-title {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+h2#main-menu-options-1,
+div#main-menu-options-2 {
+    animation-duration: 14s;
+    animation-name: appear-main-menu-options;
+}
+
+@keyframes appear-main-menu-options {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+div#main-menu-game-options {
+    animation-duration: 16s;
+    animation-name: appear-main-menu-game-options;
+}
+
+@keyframes appear-main-menu-game-options {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+ ===============================================================*/
+
+
+/*
+===============================================================
+                    START MENU */
+section#start-it {
+    width: 40%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    padding: 2% 2% 0 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+section#start-it p {
+    font-family: "Times New Roman", serif;
+    font-size: 120%;
+    text-align: justify;
+}
+
+section#start-it button {
+    font-size: 230%;
+    width: 100%;
+    justify-self: flex-end;
+    margin: 20px 0 10px 0;
+}
+
+section#start-it button:hover {
+    color: lightgreen;
+}
+
+div#player-name {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+input#hero-name {
+    font-size: 150%;
+    font-family: "Times New Roman", serif;
+    width: 55%;
+    height: 90%;
+    border-radius: 20px;
+    text-align: center;
+    border: none;
+    margin-left: 10%;
+    outline: none;
+    box-sizing: border-box;
+}
+
+div#player-name label {
+    font-size: 150%;
+}
+
+input#hero-name[type="text"]:focus {
+    outline: none;
+    border: 2px solid black;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 1),
+    0 0 4px rgba(255, 255, 255, 0.6),
+    0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+/*===============================================================*/
+
+
 /*
 ===============================================================
                     GAME MENU */
-div#in-game-menu-top {
+section#in-game-menu-top {
     width: 100%;
     align-self: flex-start;
     display: flex;
     justify-content: space-between;
     background-color: rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid white;
 }
 
 div#in-game-stats {
     display: flex;
     justify-content: space-around;
     flex-grow: 1;
+}
+
+div#in-game-player-name-container {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
 }
 
 div.in-game-points,
@@ -176,12 +383,12 @@ div.in-game-time p {
     font-weight: bold;
 }
 
-div#in-game-menu-top button {
+section#in-game-menu-top button {
     border-color: black;
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-div#in-game-menu-top button:hover {
+section#in-game-menu-top button:hover {
     box-shadow: 0 0 2px rgba(0, 0, 0, 1),
     0 0 4px rgba(217, 0, 217, 0.9),
     0 0 6px rgba(217, 0, 217, 0.6),
@@ -388,15 +595,15 @@ button.button-polygon-2 span {
     font-family: var(--in-menu-font);
 }
 
-button.button-play:hover {
+button#button-play:hover {
     color: lightgreen;
 }
 
-button.button-leaderboard:hover {
+button#button-leaderboard:hover {
     color: lightsalmon;
 }
 
-button.button-change-character:hover {
+button#button-change-character:hover {
     color: lightskyblue;
 }
 
@@ -621,7 +828,7 @@ div.game-paused-options button {
     margin: 5px;
 }
 
-button.button-resume:hover {
+button#button-resume:hover {
     color: #43c743;
 }
 
@@ -1045,7 +1252,7 @@ div.info-item {
     font-family: "Times New Roman", serif;
     font-size: 120%;
     text-align: justify;
-    padding: 10px;
+    padding: 15px;
     width: 90%;
     height: auto;
     margin-top: 7px;
@@ -1057,7 +1264,19 @@ div.info-item {
 }
 
 div.info-item:nth-child(2n+1) {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(200, 200, 200, 0.1);
+}
+
+div.info-item:first-child {
+    margin-top: 40px;
+}
+
+div.info-item:last-child {
+    margin-bottom: 30px;
+}
+
+div.info-item h3 {
+    padding-bottom: 5px;
 }
 
 /*===============================================================*/
