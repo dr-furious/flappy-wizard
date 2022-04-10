@@ -170,21 +170,21 @@ span.music-off {
 
 /*
 ===============================================================
-                    SECTION ANIMATIONS
+                    SECTION ANIMATIONS */
 
-div#title,
-section#main-menu,
-div#main-menu-top,
-hr#main-menu-hr,
-h2#main-menu-options-1,
-div#main-menu-options-2,
-div#main-menu-game-options {
+div#title.animated,
+section#main-menu.animated,
+div#main-menu-top.animated,
+hr#main-menu-hr.animated,
+h2#main-menu-options-1.animated,
+div#main-menu-options-2.animated,
+div#main-menu-game-options.animated {
     animation-iteration-count: 1;
 }
 
-div#title,
-section#main-menu {
-    animation-duration: 6s;
+div#title.animated.a1,
+section#main-menu.animated.a1 {
+    animation-duration: 10s;
     animation-name: appear-main-menu;
     -moz-animation-iteration-count: 1;
 }
@@ -198,8 +198,8 @@ section#main-menu {
     }
 }
 
-div#main-menu-top {
-    animation-duration: 9s;
+div#main-menu-top.animated.a2 {
+    animation-duration: 15s;
     animation-name: appear-main-menu-top;
 }
 
@@ -215,8 +215,8 @@ div#main-menu-top {
     }
 }
 
-hr#main-menu-hr {
-    animation-duration: 12s;
+hr#main-menu-hr.animated.a3 {
+    animation-duration: 20s;
     animation-name: appear-main-menu-title;
 }
 
@@ -232,9 +232,9 @@ hr#main-menu-hr {
     }
 }
 
-h2#main-menu-options-1,
-div#main-menu-options-2 {
-    animation-duration: 14s;
+h2#main-menu-options-1.animated.a4,
+div#main-menu-options-2.animated.a4 {
+    animation-duration: 25s;
     animation-name: appear-main-menu-options;
 }
 
@@ -250,8 +250,8 @@ div#main-menu-options-2 {
     }
 }
 
-div#main-menu-game-options {
-    animation-duration: 16s;
+div#main-menu-game-options.animated.a5 {
+    animation-duration: 30s;
     animation-name: appear-main-menu-game-options;
 }
 
@@ -267,7 +267,7 @@ div#main-menu-game-options {
     }
 }
 
- ===============================================================*/
+/*===============================================================*/
 
 
 /*
@@ -1201,7 +1201,10 @@ span#harry-potter-character {
 section#info {
     display: flex;
     flex-direction: column;
+    z-index: 1;
+    background-color: #1a1a1a;
 }
+
 
 div#info-title {
     flex-grow: 1;

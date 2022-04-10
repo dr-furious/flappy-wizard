@@ -1,21 +1,26 @@
 class LoadGameButton extends SwitchMenusButton {
-    constructor(button, clickSound, menuHide, menuShow, theme, gameMusic, player) {
-        super(button, clickSound, menuHide, menuShow, gameMusic);
+    constructor(button, clickSound, menuShow, theme, gameMusic, player, animations, mainMenuButtons) {
+        super(button, clickSound, menuShow, gameMusic);
         this.theme = theme;
         this.gameMusic = gameMusic;
         this.player = player;
+        this.sections = null;
+        this.animations = animations;
+        this.mainMenuButtons = mainMenuButtons;
     }
 
-    onclick() {
-        super.onclick();
+    onclick(sections) {
+        super.onclick(sections);
     }
 
     onclickEvent() {
         /*
-         * if (textField.getText !isInLeaderBoard), then:
-         * player.setName();
+         * let playerName = textField.getText
+         * if (playerName !isInLeaderBoard) AND !playerName.isEmpty, then:
+         * player.setName(playerName);
          * else:
          * displayErrorMessage();
+         *
          * */
         super.onclickEvent();
         this.theme.play();
@@ -23,7 +28,20 @@ class LoadGameButton extends SwitchMenusButton {
             setTimeout(() => {
                 this.gameMusic.play();
             }, 2000);
+
+            for (let i = 0; i < this.mainMenuButtons.length; i++) {
+                if (this.mainMenuButtons[i].hasAttribute("disabled")) {
+                    this.mainMenuButtons[i].removeAttribute("disabled");
+                }
+            }
         }
+
+        const animationDuration = 30000;
+        setTimeout(() => {
+            for (let i = 0; i < this.animations.length; i++) {
+                this.animations[i].classList.remove("animated");
+            }
+        }, animationDuration)
     }
 
 }

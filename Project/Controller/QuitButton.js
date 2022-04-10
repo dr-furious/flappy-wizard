@@ -1,4 +1,4 @@
-class PlayButton extends SwitchMenusButton {
+class QuitButton extends SwitchMenusButton {
     constructor(button, clickSound, menuShow, game, gameMusic) {
         super(button, clickSound, menuShow);
         this.game = game;
@@ -10,7 +10,7 @@ class PlayButton extends SwitchMenusButton {
     }
 
     onclickEvent() {
-        //this.game.start();
+        //this.game.stop();
         super.onclickEvent();
         if (this.gameMusic.duration > 0) {
             this.gameMusic.currentTime = 0;

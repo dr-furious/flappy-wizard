@@ -28,16 +28,20 @@ class SoundButton extends GameButton {
         for (let i = 0; i < this.sounds.length; i++) {
             this.sounds[i].muted = false;
         }
-        if (!this.soundOffIcon.hasAttribute("hidden")) {
-            this.soundOffIcon.setAttribute("hidden", "");
+        for (let i = 0; i < this.soundOffIcon.length; i++) {
+            if (!this.soundOffIcon[i].hasAttribute("hidden")) {
+                this.soundOffIcon[i].setAttribute("hidden", "");
+            }
         }
     }
 
     disableSound() {
         for (let i = 0; i < this.sounds.length; i++) {
             this.sounds[i].muted = true;
-            if (this.soundOffIcon.hasAttribute("hidden")) {
-                this.soundOffIcon.removeAttribute("hidden", "");
+        }
+        for (let i = 0; i < this.soundOffIcon.length; i++) {
+            if (this.soundOffIcon[i].hasAttribute("hidden")) {
+                this.soundOffIcon[i].removeAttribute("hidden");
             }
         }
     }
