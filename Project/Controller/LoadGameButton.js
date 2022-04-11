@@ -7,6 +7,9 @@ class LoadGameButton extends SwitchMenusButton {
         this.sections = null;
         this.animations = animations;
         this.mainMenuButtons = mainMenuButtons;
+        this.animationDuration = 30_000;
+        this.timeoutForTheme = null;
+        this.timeoutName = "timeoutForTheme";
     }
 
     onclick(sections) {
@@ -29,19 +32,38 @@ class LoadGameButton extends SwitchMenusButton {
                 this.gameMusic.play();
             }, 2000);
 
-            for (let i = 0; i < this.mainMenuButtons.length; i++) {
-                if (this.mainMenuButtons[i].hasAttribute("disabled")) {
-                    this.mainMenuButtons[i].removeAttribute("disabled");
-                }
-            }
+            this.enableButtons();
         }
 
-        const animationDuration = 30000;
-        setTimeout(() => {
+        let animationDuration = 30_000;
+
+        this.timeoutForTheme = setTimeout(() => {
             for (let i = 0; i < this.animations.length; i++) {
                 this.animations[i].classList.remove("animated");
             }
         }, animationDuration)
     }
 
+    skipAnimation() {
+        this.theme.pause();
+        this.gameMusic.play();
+        if (this.timeoutForTheme === null) {
+            console.log(12345)
+            return;
+        }
+        clearTimeout(this.timeoutForTheme);
+        this.enableButtons();
+    }
+
+    enableButtons() {
+        for (let i = 0; i < this.mainMenuButtons.length; i++) {
+            if (this.mainMenuButtons[i].hasAttribute("disabled")) {
+                this.mainMenuButtons[i].removeAttribute("disabled");
+            }
+        }
+    }
+
+    set setAnimationDuration(animationDuration) {
+        this.animationDuration = animationDuration;
+    }
 }

@@ -9,7 +9,7 @@ class PauseButton extends SwitchMenusButton {
     }
 
     onclickEvent() {
-        //this.game.pause();
+        //this.game.stop();
         super.onclickEvent();
     }
 

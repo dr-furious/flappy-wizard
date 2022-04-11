@@ -9,7 +9,7 @@ class ResumeButton extends SwitchMenusButton {
     }
 
     onclickEvent() {
-        //this.game.resume();
+        //this.game.stop();
         super.onclickEvent();
     }
 
