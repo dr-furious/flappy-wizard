@@ -1,31 +1,15 @@
 class LoadGameButton extends SwitchMenusButton {
-    constructor(button, clickSound, menuShow, theme, gameMusic, player, animations, mainMenuButtons) {
-        super(button, clickSound, menuShow, gameMusic);
+    constructor(clickSound, menuShow, sections, theme, gameMusic, animations, mainMenuButtons) {
+        super(clickSound, menuShow, sections);
         this.theme = theme;
         this.gameMusic = gameMusic;
-        this.player = player;
-        this.sections = null;
         this.animations = animations;
         this.mainMenuButtons = mainMenuButtons;
         this.animationDuration = 30_000;
         this.timeoutForTheme = null;
-        this.timeoutName = "timeoutForTheme";
     }
 
-    onclick(sections) {
-        super.onclick(sections);
-    }
-
-    onclickEvent() {
-        /*
-         * let playerName = textField.getText
-         * if (playerName !isInLeaderBoard) AND !playerName.isEmpty, then:
-         * player.setName(playerName);
-         * else:
-         * displayErrorMessage();
-         *
-         * */
-        super.onclickEvent();
+    initializeMainMenu() {
         this.theme.play();
         this.theme.onended = () => {
             setTimeout(() => {
@@ -35,20 +19,17 @@ class LoadGameButton extends SwitchMenusButton {
             this.enableButtons();
         }
 
-        let animationDuration = 30_000;
-
         this.timeoutForTheme = setTimeout(() => {
             for (let i = 0; i < this.animations.length; i++) {
                 this.animations[i].classList.remove("animated");
             }
-        }, animationDuration)
+        }, this.animationDuration)
     }
 
     skipAnimation() {
         this.theme.pause();
         this.gameMusic.play();
         if (this.timeoutForTheme === null) {
-            console.log(12345)
             return;
         }
         clearTimeout(this.timeoutForTheme);
@@ -63,7 +44,14 @@ class LoadGameButton extends SwitchMenusButton {
         }
     }
 
-    set setAnimationDuration(animationDuration) {
-        this.animationDuration = animationDuration;
+    writePlayerName(inputFormId, player) {
+        let textField = document.getElementById(inputFormId);
+        let playerName = textField.value;
+        console.log(playerName);
+        // if (playerName !isInLeaderBoard) AND !playerName.isEmpty, then:
+        player.setName = playerName;
+        // else:
+        // displayErrorMessage();
     }
+
 }

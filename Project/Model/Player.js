@@ -1,40 +1,34 @@
-class Player {
+class Player extends Actor {
     constructor(image, positionX, positionY) {
-        this.image = image;
+        super(image, positionX, positionY);
         this.name = null;
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.currentPX = this.positionX;
-        this.currentPY = this.positionY;
-
-        this.timer = null;
+        this.points = 0;
     }
 
     fall(minusHigh) {
-        this.timer = setTimeout(() => {
-            if (!this.isDead()) {
-                this.currentPY += minusHigh;
-            }
-        }, 100);
+        this.positionY += minusHigh;
     }
 
     isDead() {
-        if (this.currentPY === 600 || this.currentPY <= 0) {
-            clearTimeout(this.timer);
-            this.currentPX = this.positionX;
-            this.currentPY = this.positionY;
-            return true;
-        }
-        return false;
+        return this.positionY >= 600 || this.positionY <= 0 || this.positionX === 0 || this.positionX >= 1280;
     }
 
-    jump(plusHigh) {
-        this.timer = setTimeout(() => {
-            if (!this.isDead()) {
-                this.currentPY -= plusHigh;
-            }
-        }, 100);
+    jump(speed) {
+        this.positionY -= speed;
     }
+
+    goForward(plusHorizontal) {
+        this.positionX += plusHorizontal;
+    }
+
+    goBackward(minusHorizontal) {
+        this.positionX -= minusHorizontal;
+    }
+
+    setInitialPoints() {
+        this.points = 0;
+    }
+
 
     set setName(name) {
         this.name = name;
@@ -45,11 +39,11 @@ class Player {
     }
 
     set setPositionX(positionX) {
-        this.currentPX = positionX;
+        this.positionX = positionX;
     }
 
     set setPositionY(positionY) {
-        this.currentPY = positionY;
+        this.positionY = positionY;
     }
 
     get getName() {
@@ -61,11 +55,15 @@ class Player {
     }
 
     get getPositionX() {
-        return this.currentPX;
+        return this.positionX;
     }
 
     get getPositionY() {
-        return this.currentPY;
+        return this.positionY;
+    }
+
+    get getPoints() {
+        return this.points;
     }
 
 }

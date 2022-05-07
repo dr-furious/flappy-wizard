@@ -1,20 +1,16 @@
 class SoundButton extends GameButton {
-    constructor(button, clickSound, sounds, soundOffIcon) {
-        super(button, clickSound);
+    constructor(clickSound, sounds, soundOffIcons) {
+        super(clickSound);
         this.sounds = sounds;
         this.clickCounter = 0;
-        this.soundOffIcon = soundOffIcon;
+        this.soundOffIcons = soundOffIcons;
 
         if (this.areMuted()) {
             this.enableSound();
         }
     }
 
-    onclick() {
-        super.onclick();
-    }
-
-    onclickEvent() {
+    manageSounds() {
         if (this.clickCounter % 2 === 1) {
             this.enableSound();
         } else {
@@ -28,9 +24,9 @@ class SoundButton extends GameButton {
         for (let i = 0; i < this.sounds.length; i++) {
             this.sounds[i].muted = false;
         }
-        for (let i = 0; i < this.soundOffIcon.length; i++) {
-            if (!this.soundOffIcon[i].hasAttribute("hidden")) {
-                this.soundOffIcon[i].setAttribute("hidden", "");
+        for (let i = 0; i < this.soundOffIcons.length; i++) {
+            if (!this.soundOffIcons[i].hasAttribute("hidden")) {
+                this.soundOffIcons[i].setAttribute("hidden", "");
             }
         }
     }
@@ -39,9 +35,9 @@ class SoundButton extends GameButton {
         for (let i = 0; i < this.sounds.length; i++) {
             this.sounds[i].muted = true;
         }
-        for (let i = 0; i < this.soundOffIcon.length; i++) {
-            if (this.soundOffIcon[i].hasAttribute("hidden")) {
-                this.soundOffIcon[i].removeAttribute("hidden");
+        for (let i = 0; i < this.soundOffIcons.length; i++) {
+            if (this.soundOffIcons[i].hasAttribute("hidden")) {
+                this.soundOffIcons[i].removeAttribute("hidden");
             }
         }
     }

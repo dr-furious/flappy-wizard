@@ -1,19 +1,11 @@
 class SwitchMenusButton extends GameButton {
 
-    constructor(button, clickSound, menuShow) {
-        super(button, clickSound);
+    constructor(clickSound, menuShow, sections) {
+        super(clickSound);
         this.menuShow = menuShow;
-        this.sections = null;
-    }
-
-    onclick(sections) {
         this.sections = sections;
-        super.onclick();
     }
 
-    onclickEvent() {
-        this.switchMenus(this.sections);
-    }
 
     switchMenus() {
         this.findDisplayedSection(this.sections).setAttribute("hidden", "");

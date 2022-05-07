@@ -12,15 +12,39 @@
 </head>
 
 <body>
-<img src="../../Images/Meadow_lvl_1.png" alt="bg" id="background-lvl-1" hidden>
+<img src="../../Images/Level%20Easy/level-easy-background-layer-1.png" alt="bg" id="background-easy-layer-1" hidden>
+<img src="../../Images/Level%20Easy/level-easy-background-layer-2.png" alt="bg" id="background-easy-layer-2" hidden>
+<img src="../../Images/Level%20Easy/level-easy-background-layer-3.png" alt="bg" id="background-easy-layer-3" hidden>
+
+<img src="../../Images/Level%20Medium/level-medium-background-layer-1.png" alt="bg" id="background-medium-layer-1"
+     hidden>
+<img src="../../Images/Level%20Medium/level-medium-background-layer-2.png" alt="bg" id="background-medium-layer-2"
+     hidden>
+<img src="../../Images/Level%20Medium/level-medium-background-layer-3.png" alt="bg" id="background-medium-layer-3"
+     hidden>
+
+<img src="../../Images/Level%20Hard/level-hard-background-layer-1.png" alt="bg" id="background-hard-layer-1" hidden>
+<img src="../../Images/Level%20Hard/level-hard-background-layer-2.png" alt="bg" id="background-hard-layer-2" hidden>
+<img src="../../Images/Level%20Hard/level-hard-background-layer-3.png" alt="bg" id="background-hard-layer-3" hidden>
+
+<img src="../../Images/Level%20Extreme/level-insane-background-layer-1.png" alt="bg" id="background-insane-layer-1"
+     hidden>
+<img src="../../Images/Level%20Extreme/level-insane-background-layer-2.png" alt="bg" id="background-insane-layer-2"
+     hidden>
+<img src="../../Images/Level%20Extreme/level-insane-background-layer-3.png" alt="bg" id="background-insane-layer-3"
+     hidden>
+
+<img src="../../Images/Hoop.png" alt="hoop" id="hoop" hidden>
+<img src="../../Images/hoop-front.png" alt="hoop" id="hoop-front" hidden>
+
 <img src="../../Images/Harry.svg" alt="harry" id="Harry-Potter-wizard" hidden>
 
-<audio id="mainTheme" src="../../Sounds-and-Music/hpmusic.mp3"></audio>
-<audio id="gameMusic" src="../../Sounds-and-Music/game-music.wav" loop></audio>
-<audio id="fly-up-sound" src="../../Sounds-and-Music/wind-blow.wav"></audio>
-<audio id="knock-sound" src="../../Sounds-and-Music/wood-hit.wav"></audio>
-<audio id="click-sound" src="../../Sounds-and-Music/click.wav"></audio>
-<audio id="cink-sound" src="../../Sounds-and-Music/cink.mp3"></audio>
+<audio id="mainTheme" class="music" src="../../Sounds-and-Music/hpmusic.mp3"></audio>
+<audio id="gameMusic" class="music" src="../../Sounds-and-Music/game-music.wav" loop></audio>
+<audio id="fly-up-sound" class="sound" src="../../Sounds-and-Music/wind-blow.wav"></audio>
+<audio id="knock-sound" class="sound" src="../../Sounds-and-Music/wood-hit.wav"></audio>
+<audio id="click-sound" class="sound" src="../../Sounds-and-Music/click.wav"></audio>
+<audio id="clink-sound" class="sound" src="../../Sounds-and-Music/clink.mp3"></audio>
 
 <img>
 
@@ -65,11 +89,11 @@
             <div id="in-game-stats">
                 <div class="in-game-points">
                     <h3>Points:</h3>
-                    <p class="scored-points">21</p>
+                    <p id="points-in-game" class="scored-points">0</p>
                 </div>
                 <div class="in-game-time">
                     <h3>Time:</h3>
-                    <p class="time-from-start">00:00:00</p>
+                    <p id="time-in-game" class="time-from-start">00:00:00</p>
                 </div>
             </div>
 
@@ -188,7 +212,7 @@
                             <span class="volume-off" hidden><ion-icon name="close-circle-outline"></ion-icon></span>
                         </button>
                         <div class="slide-container">
-                            <input type="range" min="1" max="100" class="sound-slider">
+                            <input id="volume-slider" type="range" min="1" max="100" class="sound-slider">
                         </div>
                     </div>
                     <div id="game-paused-music">
@@ -197,7 +221,7 @@
                             <span class="music-off" hidden><ion-icon name="close-circle-outline"></ion-icon></span>
                         </button>
                         <div class="slide-container">
-                            <input type="range" min="1" max="100" class="music-slider">
+                            <input id="music-slider" type="range" min="1" max="100" class="music-slider">
                         </div>
                     </div>
                 </div>
@@ -228,7 +252,7 @@
                 <button id="button-resume" class="button-polygon-2">
                     <span class="text-in-button-polygon-2">Resume</span>
                 </button>
-                <button class="button-polygon-2 button-restart">
+                <button id="button-restart-id" class="button-polygon-2 button-restart">
                     <span class="text-in-button-polygon-2">Restart</span>
                 </button>
                 <button class="button-polygon-2 button-quit">
@@ -598,62 +622,24 @@
                 <div id="info-text">
                     <div class="info-item">
                         <h3>About</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolorem doloribus eligendi
-                            explicabo fugiat laboriosam laudantium nostrum, omnis perferendis perspiciatis placeat quasi
-                            qui ratione saepe sint voluptas voluptatibus. Asperiores corporis, debitis dicta dolor,
-                            dolore dolorum error et labore modi molestias nesciunt officiis qui reiciendis ullam
-                            voluptatibus? A, ab aliquid doloremque impedit iure placeat quam quibusdam veniam veritatis
-                            voluptates. Assumenda atque, consequuntur cum, delectus deleniti dolor illo iusto minus
-                            nostrum, omnis perferendis quos rerum ullam? Aliquid, rerum vero? Alias aliquid animi
-                            assumenda cum dolor doloribus et eveniet, facilis fuga, fugiat harum id maxime mollitia
-                            neque nihil perspiciatis qui ratione recusandae repellat reprehenderit similique velit
-                            voluptatem. Cum labore modi saepe velit? Ad adipisci cum delectus eos est fugiat illo iure
-                            laborum nam natus, nobis numquam quidem recusandae repudiandae sit soluta totam ullam unde
-                            ut voluptatum! Amet, aut consectetur debitis deserunt doloribus earum error facilis in
-                            nobis, odit placeat quam reiciendis saepe? Accusantium aliquam commodi harum ipsam neque non
-                            officia, officiis perspiciatis? Accusamus ad atque autem eius ipsum, nemo nostrum odit sint
-                            ut voluptatem? Accusantium, aut autem dicta dolorem eligendi error eum ex expedita explicabo
-                            laboriosam minus nam natus nihil nobis praesentium provident quae quisquam ratione repellat
-                            sunt tempore, totam, ut voluptate voluptatum.</p>
+                        <p>Harry Potter Game</p>
                     </div>
                     <div class="info-item">
                         <h3>How to play</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad consectetur distinctio ea ipsa
-                            itaque iusto magni quos sapiente sequi vel. Deserunt dolorem dolores eligendi hic illo ipsa
-                            minima molestiae mollitia quod soluta? Ab aliquam, amet blanditiis dicta dolores doloribus
-                            dolorum ea, eius eos eveniet incidunt ipsum iure qui? Alias atque blanditiis cumque, eveniet
-                            illo laboriosam maxime mollitia nam neque non porro, quam quos sapiente soluta suscipit
-                            unde, ut. Accusantium adipisci architecto atque blanditiis corporis cupiditate dignissimos
-                            distinctio dolor dolore dolores ea et eveniet fuga id in ipsum minima modi molestias nihil
-                            non, obcaecati quam quia repellendus repudiandae tempore ullam vel.</p>
+                        <p>Press SPACE to fly up. If not pressing SPACE, wizard will start to fall down. If you fly
+                            above certain point or fall under certain point, wizard will die and game will end.</p>
                     </div>
                     <div class="info-item">
                         <h3>Controls</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab adipisci architecto consectetur
-                            dolor doloribus ducimus eaque et exercitationem fugit ipsum magnam minima nihil quod
-                            reiciendis, sapiente? Animi at autem eligendi eos magnam, nemo, nobis omnis optio quia rerum
-                            tenetur velit! Commodi distinctio perferendis quidem recusandae rem repellendus sint
-                            temporibus veritatis.</p>
+                        <p>You control this game using SPACE key.</p>
                     </div>
                     <div class="info-item">
                         <h3>Where to donate</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequatur hic
-                            inventore ipsa laudantium quae sunt tempora. Architecto beatae blanditiis dignissimos, dolor
-                            ea enim et, fugit id maxime minima nemo nisi pariatur perferendis provident sint ullam
-                            veritatis vero? Corporis quod, similique! Cupiditate ea illo laboriosam molestiae nulla quae
-                            quos. Illum!</p>
+                        <p>Nowhere! Game is free</p>
                     </div>
                     <div class="info-item">
                         <h3>Credits</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet assumenda, atque
-                            deserunt dicta error fugiat illum iste labore magnam nam, nulla veniam? Aliquam architecto
-                            assumenda culpa deleniti dignissimos excepturi harum, hic ipsa laboriosam magnam minus
-                            molestiae molestias neque nesciunt nobis nulla obcaecati odio officia pariatur praesentium
-                            provident quam quas quia quidem, ratione reiciendis rem repellat reprehenderit sapiente sed
-                            similique soluta sunt voluptatibus. Accusantium aliquid assumenda at cumque delectus
-                            distinctio dolorem dolores eaque earum eligendi eum excepturi expedita fuga impedit ipsam
-                            iste labore libero minus molestias nisi odio officiis quidem quisquam ratione repellat
-                            repudiandae saepe, sint soluta tempore vel, vitae!</p>
+                        <p>Created by Me</p>
                     </div>
                 </div>
             </div>
@@ -665,26 +651,11 @@
 
 </div>
 
-<script>
-    // Following 16 lines of code taken from: https://nikitahl.com/style-range-input-css on 5th of April 2022
-    const rangeInputs = document.querySelectorAll('input[type="range"]')
+<script src="../Controller/EventHandlers/ToggleBarEvents.js"></script>
 
-    function handleInputChange(e) {
-        let target = e.target
-        if (e.target.type !== 'range') {
-            target = document.getElementById('range')
-        }
-        const min = target.min
-        const max = target.max
-        const val = target.value
-        target.style.backgroundSize = (val - min) * 100 / (max - min) + "% 100%";
-    }
-
-    rangeInputs.forEach(input => {
-        input.addEventListener('input', handleInputChange)
-    });
-</script>
-
+<!--
+<script src="../Model/Actor.js"></script>
+<script src="../Model/Background.js"></script>
 <script src="../Model/Game.js"></script>
 <script src="../Model/Player.js"></script>
 <script src="../Controller/GameButton.js"></script>
@@ -697,10 +668,23 @@
 <script src="../Controller/ResumeButton.js"></script>
 <script src="../Controller/ReturnButton.js"></script>
 <script src="../Controller/HelpButton.js"></script>
-<!-- <script src="Painter.js"></script> -->
 <script src="../Controller/KeyboardEvents.js"></script>
-<script src="Main.js"></script>
-<script src="../Controller/ButtonEventHandler.js"></script>
+<script src="../Main.js"></script>
+<script src="../Controller/MainEventHandler.js"></script>
+-->
+
+<script src="../Controller/EventHandlers/KeyboardEvents.js"></script>
+<script src=../Model/Actor.js></script>
+<script src=../Model/Background.js></script>
+<script src=../Model/Player.js></script>
+<script src=../Controller/Game.js></script>
+<script src=../Model/ExtendedBackground.js></script>
+<script src=../Model/Hoop.js></script>
+<script src=../Model/FullHoop.js></script>
+<script src=../Controller/EventHandlers/MainEventHandler.js></script>
+<script src=../View/GameView.js></script>
+<script src="../MainTwo.js"></script>
+
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
