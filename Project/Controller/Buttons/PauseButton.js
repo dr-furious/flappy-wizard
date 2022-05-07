@@ -1,10 +1,5 @@
 class PauseButton extends SwitchMenusButton {
-    constructor(clickSound, menuShow) {
-        super(clickSound, menuShow);
+    constructor(clickSound, menuShow, sections) {
+        super(clickSound, menuShow, sections);
     }
-
-    setPausedMenuStat(stat, location) {
-        location.innerText = stat;
-    }
-
 }

@@ -6,8 +6,8 @@ function setTime(timeInGame) {
 
 }
 
-function setPlayerStat(playerStat, location) {
-    location.innerText = playerStat;
+function setPlayerStat(playerStat, destination) {
+    destination.innerText = playerStat;
 }
 
 function drawScene(items, context) {

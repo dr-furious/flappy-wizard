@@ -3,6 +3,7 @@ class Player extends Actor {
         super(image, positionX, positionY);
         this.name = null;
         this.points = 0;
+        this.missedHooks = 0;
     }
 
     fall(minusHigh) {
@@ -10,7 +11,7 @@ class Player extends Actor {
     }
 
     isDead() {
-        return this.positionY >= 600 || this.positionY <= 0 || this.positionX === 0 || this.positionX >= 1280;
+        return this.positionY >= 720 || this.positionY <= -128 || this.positionX === 0 || this.positionX >= 1280;
     }
 
     jump(speed) {
@@ -25,10 +26,10 @@ class Player extends Actor {
         this.positionX -= minusHorizontal;
     }
 
-    setInitialPoints() {
+    resetStats() {
         this.points = 0;
+        this.missedHooks = 0;
     }
-
 
     set setName(name) {
         this.name = name;
@@ -66,4 +67,7 @@ class Player extends Actor {
         return this.points;
     }
 
+    get getMissedHoops() {
+        return this.missedHooks;
+    }
 }

@@ -1,14 +1,14 @@
 class ReturnButton extends SwitchMenusButton {
-    constructor(button, clickSound) {
-        super(button, clickSound, null);
+    constructor(clickSound, sections) {
+        super(clickSound, sections);
+        this.sections = sections;
     }
 
-    onclickEvent(sections) {
-        let temp = Array.from(sections).reverse();
-
-        for (let i = 0; i < temp.length; i++) {
-            if (!temp[i].hasAttribute("hidden")) {
-                temp[i].setAttribute("hidden", "");
+    hideLastDisplayedMenu() {
+        let reversedSections = Array.from(this.sections).reverse();
+        for (let i = 0; i < reversedSections.length; i++) {
+            if (!reversedSections[i].hasAttribute("hidden")) {
+                reversedSections[i].setAttribute("hidden", "");
                 break;
             }
         }

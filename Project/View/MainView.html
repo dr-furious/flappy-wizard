@@ -157,19 +157,19 @@
                 <hr id="main-menu-hr" class="animated a3">
                 <h2 id="main-menu-options-1" class="animated a4">Choose the game difficulty:</h2>
                 <div id="main-menu-options-2" class="game-difficulty-buttons animated a4">
-                    <input type="radio" id="radiobutton-easy" name="game-difficulty"
+                    <input class="game-difficulty-option" type="radio" id="radiobutton-easy" name="game-difficulty"
                            value="Easy">
                     <label class="button-easy" for="radiobutton-easy">Easy</label>
 
-                    <input type="radio" id="radiobutton-medium" name="game-difficulty"
+                    <input class="game-difficulty-option" type="radio" id="radiobutton-medium" name="game-difficulty"
                            value="Medium" checked>
                     <label class="button-medium" for="radiobutton-medium">Medium</label>
 
-                    <input type="radio" id="radiobutton-hard" name="game-difficulty"
+                    <input class="game-difficulty-option" type="radio" id="radiobutton-hard" name="game-difficulty"
                            value="Hard">
                     <label class="button-hard" for="radiobutton-hard">Hard</label>
 
-                    <input type="radio" id="radiobutton-insane" name="game-difficulty"
+                    <input class="game-difficulty-option" type="radio" id="radiobutton-insane" name="game-difficulty"
                            value="Insane">
                     <label class="button-insane" for="radiobutton-insane">Insane</label>
                 </div>
@@ -233,17 +233,17 @@
                     <div class="points">
                         <h3>Points:</h3>
                         <hr class="paused-game-stats-hr">
-                        <p>- 21 -</p>
+                        <p class="points-stat">- 0 -</p>
                     </div>
                     <div class="missed-hooks">
                         <h3>Missed Hooks:</h3>
                         <hr class="paused-game-stats-hr">
-                        <p>- 21 -</p>
+                        <p class="missed-hoops-stat">- 0 -</p>
                     </div>
                     <div class="time">
                         <h3>Time:</h3>
                         <hr class="paused-game-stats-hr">
-                        <p>00:00:00</p>
+                        <p class="time-stat">00:00:00</p>
                     </div>
                 </div>
             </div>
@@ -252,7 +252,7 @@
                 <button id="button-resume" class="button-polygon-2">
                     <span class="text-in-button-polygon-2">Resume</span>
                 </button>
-                <button id="button-restart-id" class="button-polygon-2 button-restart">
+                <button class="button-polygon-2 button-restart">
                     <span class="text-in-button-polygon-2">Restart</span>
                 </button>
                 <button class="button-polygon-2 button-quit">
@@ -296,17 +296,17 @@
                     <div class="game-over-points">
                         <h3>Points:</h3>
                         <hr class="paused-game-stats-hr">
-                        <p class="scored-points">- 21 -</p>
+                        <p class="points-stat">- 0 -</p>
                     </div>
                     <div class="game-over-missed-hooks">
                         <h3>Missed Hooks:</h3>
                         <hr class="paused-game-stats-hr">
-                        <p>- 21 -</p>
+                        <p class="missed-hoops-stat">- 0 -</p>
                     </div>
                     <div class="game-over-time">
                         <h3>Time:</h3>
                         <hr class="paused-game-stats-hr">
-                        <p class="time-from-start">00:00:00</p>
+                        <p class="time-stat">00:00:00</p>
                     </div>
                 </div>
             </div>
@@ -673,14 +673,23 @@
 <script src="../Controller/MainEventHandler.js"></script>
 -->
 
-<script src="../Controller/EventHandlers/KeyboardEvents.js"></script>
 <script src=../Model/Actor.js></script>
 <script src=../Model/Background.js></script>
 <script src=../Model/Player.js></script>
-<script src=../Controller/Game.js></script>
 <script src=../Model/ExtendedBackground.js></script>
 <script src=../Model/Hoop.js></script>
 <script src=../Model/FullHoop.js></script>
+<script src="../Controller/EventHandlers/KeyboardEvents.js"></script>
+<script src=../Controller/Game.js></script>
+<script src="../Controller/Buttons/GameButton.js"></script>
+<script src="../Controller/Buttons/SwitchMenusButton.js"></script>
+<script src="../Controller/Buttons/HelpButton.js"></script>
+<script src="../Controller/Buttons/LoadGameButton.js"></script>
+<script src="../Controller/Buttons/PauseButton.js"></script>
+<script src="../Controller/Buttons/PlayButton.js"></script>
+<script src="../Controller/Buttons/QuitButton.js"></script>
+<script src="../Controller/Buttons/ReturnButton.js"></script>
+<script src="../Controller/Buttons/SoundButton.js"></script>
 <script src=../Controller/EventHandlers/MainEventHandler.js></script>
 <script src=../View/GameView.js></script>
 <script src="../MainTwo.js"></script>

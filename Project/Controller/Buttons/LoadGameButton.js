@@ -24,11 +24,16 @@ class LoadGameButton extends SwitchMenusButton {
                 this.animations[i].classList.remove("animated");
             }
         }, this.animationDuration)
+
+        this.switchMenus();
     }
 
     skipAnimation() {
         this.theme.pause();
         this.gameMusic.play();
+        for (let i = 0; i < this.animations.length; i++) {
+            this.animations[i].classList.remove("animated");
+        }
         if (this.timeoutForTheme === null) {
             return;
         }
@@ -47,11 +52,17 @@ class LoadGameButton extends SwitchMenusButton {
     writePlayerName(inputFormId, player) {
         let textField = document.getElementById(inputFormId);
         let playerName = textField.value;
-        console.log(playerName);
-        // if (playerName !isInLeaderBoard) AND !playerName.isEmpty, then:
-        player.setName = playerName;
-        // else:
-        // displayErrorMessage();
+        if (playerName.length === 0) {
+            player.setName = this.generateRandomName();
+        } else {
+            player.setName = playerName;
+        }
+    }
+
+    generateRandomName() {
+        let name = "Guest";
+        let id = Math.round(Math.random() * (1000000 - 1) + 1);
+        return name + id;
     }
 
 }

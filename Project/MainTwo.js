@@ -1,7 +1,6 @@
 function mainLoop() {
-    let flag = 3;
-    let backBackgroundSpeed = 0.5;
-    let frontBackgroundSpeed = 4;
+    let backBackgroundSpeed = Game.backBackgroundSpeed;
+    let frontBackgroundSpeed = Game.frontBackgroundSpeed;
     if (flag === 0) {
         drawScene(imagesLevelEasy, context);
         extendedBackgroundEasyLayerOne.moveLeft(backBackgroundSpeed);
@@ -17,22 +16,25 @@ function mainLoop() {
         extendedBackgroundHardLayerOne.moveLeft(backBackgroundSpeed);
         extendedBackgroundHardLayerTwo.moveLeft(frontBackgroundSpeed);
         extendedBackgroundHardLayerThree.moveLeft(frontBackgroundSpeed);
-    } else {
+    } else if (flag === 3) {
         drawScene(imagesLevelInsane, context);
         extendedBackgroundInsaneLayerOne.moveLeft(backBackgroundSpeed);
         extendedBackgroundInsaneLayerTwo.moveLeft(frontBackgroundSpeed);
         extendedBackgroundInsaneLayerThree.moveLeft(frontBackgroundSpeed);
+    } else {
+        console.log("Error");
+        return;
     }
     setTime(timeInGame);
     setPlayerStat(harryPotter.getPoints, pointsInGame);
-    fullHoopOne.moveLeft(4);
-    fullHoopTwo.moveLeft(4);
-    fullHoopThree.moveLeft(4);
+    fullHoopOne.moveLeft(frontBackgroundSpeed);
+    fullHoopTwo.moveLeft(frontBackgroundSpeed);
+    fullHoopThree.moveLeft(frontBackgroundSpeed);
     if (!inGameMenu.hasAttribute("hidden")) {
         if (keys[32] === true) {
             harryPotter.jump(5);
         } else {
-            harryPotter.fall(6);
+            harryPotter.fall(5);
         }
     }
 }
