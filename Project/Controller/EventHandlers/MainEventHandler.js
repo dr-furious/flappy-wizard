@@ -275,12 +275,15 @@ chooseDifficultyRadioButtons.forEach(radiobutton => {
 
 
 // Starts the game
+let movingInterval;
 playButton.onclick = () => {
+    harryPotter.resurrect();
     playButtonVirtual.playClick();
     playButtonVirtual.replayMusic();
     harryPotter.resetStats();
     resetDefaultPositions();
     Game.start(runAndCheck);
+    moveScene();
     let byFactor = speedUpAccordingly();
     Game.speedUp(byFactor);
     playButtonVirtual.switchMenus();
@@ -290,13 +293,12 @@ playButton.onclick = () => {
 // Pauses the game
 pauseButton.onclick = () => {
     Game.pause();
+    clearInterval(movingInterval);
     pauseButtonVirtual.playClick();
     pauseButtonVirtual.switchMenus();
     pointsStat.forEach(item => {
         setPlayerStat(harryPotter.getPoints, item);
-        console.log(harryPotter.getPoints);
     });
-    console.log(harryPotter.getPoints);
     missedHoopsStat.forEach(item => {
         setPlayerStat(harryPotter.getMissedHoops, item);
     });
@@ -308,6 +310,7 @@ pauseButton.onclick = () => {
 // Restarts the game
 restartButtons.forEach(restartButton => {
     restartButton.addEventListener("click", () => {
+        harryPotter.resurrect();
         resumeRestartButtonVirtual.playClick();
         resetDefaultPositions();
         playButtonVirtual.replayMusic();
@@ -317,6 +320,8 @@ restartButtons.forEach(restartButton => {
         resumeRestartButtonVirtual.switchMenus();
         harryPotter.resetStats();
         Game.restart(runAndCheck);
+        clearInterval(movingInterval);
+        moveScene();
         let byFactor = speedUpAccordingly();
         Game.speedUp(byFactor);
     });
@@ -328,11 +333,13 @@ resumeButton.onclick = () => {
     pausedGameMenu.setAttribute("hidden", "");
     inGameMenu.removeAttribute("hidden");
     Game.resume(runAndCheck);
+    moveScene();
 }
 
 // Quits the game
 quitButtons.forEach(quitButton => {
     quitButton.addEventListener("click", () => {
+        clearInterval(movingInterval);
         quitButtonVirtual.playClick();
         quitButtonVirtual.replayMusic();
         // Store data
@@ -394,11 +401,38 @@ showLeaderBoardButton.onclick = () => {
 
 
 function runAndCheck() {
-    if (harryPotter.isDead()) {
+    if (harryPotter.positionY >= 720 || harryPotter.positionY <= -128 || harryPotter.positionX === 0 || harryPotter.positionX >= 1280 || !harryPotter.isAlive) {
+        harryPotter.die();
         Game.pause();
+        pointsStat.forEach(item => {
+            setPlayerStat(harryPotter.getPoints, item);
+        });
+        missedHoopsStat.forEach(item => {
+            setPlayerStat(harryPotter.getMissedHoops, item);
+        });
+        timeStat.forEach(item => {
+            setTime(item);
+        });
         switchToGameOverMenuButton.switchMenus();
     }
     mainLoop();
+    fullHoopOne.isPlayerTouching(harryPotter);
+    fullHoopTwo.isPlayerTouching(harryPotter);
+    fullHoopThree.isPlayerTouching(harryPotter);
+    drawHitbox(fullHoopOne.getPlusPointHitbox, "green");
+    drawHitbox(fullHoopTwo.getPlusPointHitbox, "green");
+    drawHitbox(fullHoopThree.getPlusPointHitbox, "green");
+    drawHitbox(fullHoopOne.getMinusPointHitbox, "yellow");
+    drawHitbox(fullHoopTwo.getMinusPointHitbox, "yellow");
+    drawHitbox(fullHoopThree.getMinusPointHitbox, "yellow");
+    drawHitbox(fullHoopOne.getKillHitboxOne, "red");
+    drawHitbox(fullHoopTwo.getKillHitboxOne, "red");
+    drawHitbox(fullHoopThree.getKillHitboxOne, "red");
+    drawHitbox(fullHoopOne.getKillHitboxTwo, "red");
+    drawHitbox(fullHoopTwo.getKillHitboxTwo, "red");
+    drawHitbox(fullHoopThree.getKillHitboxTwo, "red");
+    drawHitbox(harryPotter.getHitboxOne, "black");
+    drawHitbox(harryPotter.getHitboxTwo, "black");
 }
 
 function speedUpAccordingly() {
@@ -431,4 +465,55 @@ function resetDefaultPositions() {
     fullHoopOne.setPositionX = 0;
     fullHoopTwo.setPositionX = canvas.width / 2 + canvas.width / 3;
     fullHoopThree.setPositionX = canvas.width + canvas.width / 3;
+}
+
+
+function moveScene() {
+    if (!harryPotter.isAlive) {
+        return;
+    }
+    let backBackgroundSpeed = Game.backBackgroundSpeed;
+    let frontBackgroundSpeed = Game.frontBackgroundSpeed;
+    movingInterval = setInterval(() => {
+        if (flag === 0) {
+            extendedBackgroundEasyLayerOne.moveLeft(backBackgroundSpeed);
+            extendedBackgroundEasyLayerTwo.moveLeft(frontBackgroundSpeed);
+            extendedBackgroundEasyLayerThree.moveLeft(frontBackgroundSpeed);
+        } else if (flag === 1) {
+            extendedBackgroundMediumLayerOne.moveLeft(backBackgroundSpeed);
+            extendedBackgroundMediumLayerTwo.moveLeft(frontBackgroundSpeed);
+            extendedBackgroundMediumLayerThree.moveLeft(frontBackgroundSpeed);
+        } else if (flag === 2) {
+            extendedBackgroundHardLayerOne.moveLeft(backBackgroundSpeed);
+            extendedBackgroundHardLayerTwo.moveLeft(frontBackgroundSpeed);
+            extendedBackgroundHardLayerThree.moveLeft(frontBackgroundSpeed);
+        } else if (flag === 3) {
+            extendedBackgroundInsaneLayerOne.moveLeft(backBackgroundSpeed);
+            extendedBackgroundInsaneLayerTwo.moveLeft(frontBackgroundSpeed);
+            extendedBackgroundInsaneLayerThree.moveLeft(frontBackgroundSpeed);
+        } else {
+            console.log("Error");
+        }
+        setTime(timeInGame);
+        setPlayerStat(harryPotter.getPoints, pointsInGame);
+        fullHoopOne.moveLeft(frontBackgroundSpeed);
+        fullHoopTwo.moveLeft(frontBackgroundSpeed);
+        fullHoopThree.moveLeft(frontBackgroundSpeed);
+        if (!inGameMenu.hasAttribute("hidden")) {
+            if (keys[32] === true) {
+                harryPotter.jump(5, flyUpSound);
+            } else {
+                harryPotter.fall(5);
+            }
+        }
+    }, 1000 / 60);
+}
+
+
+function drawHitbox(hitbox, color) {
+    context.strokeStyle = color;
+    context.beginPath();
+    context.rect(hitbox.getPositionX, hitbox.getPositionY, hitbox.getWidth, hitbox.getHeight);
+    context.stroke();
+    context.closePath();
 }

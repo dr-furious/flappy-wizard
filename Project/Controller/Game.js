@@ -8,7 +8,7 @@ class Game {
     static defaultBackBackgroundSpeed = this.backBackgroundSpeed;
     static defaultFrontBackgroundSpeed = this.frontBackgroundSpeed;
 
-    static FPS = 1000 / 60;
+    static FPS = 1000 / 240;
 
     /**
      * Main Game manipulation functions

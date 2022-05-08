@@ -4,18 +4,33 @@ class Player extends Actor {
         this.name = null;
         this.points = 0;
         this.missedHooks = 0;
+        this.isDead = false;
+        this.width = 72;
+        this.height = 128;
+        this.isAbleToGainPoint = true;
+        this.hitBoxOne = new Hitbox(this.getPositionX + this.getWidth / 5 * 2, this.getPositionY + this.getHeight / 4, this.getWidth / 9 * 4, this.getHeight / 4);
+        this.hitBoxTwo = new Hitbox(this.getPositionX + this.getWidth / 7 * 2, this.getPositionY + this.getHeight / 5 * 2, this.getWidth / 9 * 4, this.getHeight / 4);
     }
 
     fall(minusHigh) {
         this.positionY += minusHigh;
+        this.hitBoxOne.updatePosition(this.getPositionX + this.getWidth / 5 * 2, this.getPositionY + this.getHeight / 4);
+        this.hitBoxTwo.updatePosition(this.getPositionX + this.getWidth / 7 * 2, this.getPositionY + this.getHeight / 5 * 2);
     }
 
-    isDead() {
-        return this.positionY >= 720 || this.positionY <= -128 || this.positionX === 0 || this.positionX >= 1280;
+    die() {
+        this.isDead = true;
     }
 
-    jump(speed) {
+    resurrect() {
+        this.isDead = false;
+    }
+
+    jump(speed, sound) {
         this.positionY -= speed;
+        this.hitBoxOne.updatePosition(this.getPositionX + this.getWidth / 5 * 2, this.getPositionY + this.getHeight / 4);
+        this.hitBoxTwo.updatePosition(this.getPositionX + this.getWidth / 7 * 2, this.getPositionY + this.getHeight / 5 * 2);
+        sound.play();
     }
 
     goForward(plusHorizontal) {
@@ -29,6 +44,15 @@ class Player extends Actor {
     resetStats() {
         this.points = 0;
         this.missedHooks = 0;
+    }
+
+    gainPoint() {
+        this.points++;
+    }
+
+    loosePoint() {
+        this.points--;
+        this.missedHooks++;
     }
 
     set setName(name) {
@@ -45,6 +69,10 @@ class Player extends Actor {
 
     set setPositionY(positionY) {
         this.positionY = positionY;
+    }
+
+    set setIsAbleToGainPoints(value) {
+        this.isAbleToGainPoint = value;
     }
 
     get getName() {
@@ -69,5 +97,21 @@ class Player extends Actor {
 
     get getMissedHoops() {
         return this.missedHooks;
+    }
+
+    get getHitboxOne() {
+        return this.hitBoxOne;
+    }
+
+    get getHitboxTwo() {
+        return this.hitBoxTwo;
+    }
+
+    get isAlive() {
+        return !this.isDead;
+    }
+
+    get isAbleToGain() {
+        return this.isAbleToGainPoint;
     }
 }
