@@ -24,3 +24,17 @@ function drawScene(items, context) {
         context.drawImage(item.getImage, item.getPositionX, item.getPositionY, item.getWidth, item.getHeight);
     })
 }
+
+
+function drawHitbox(hitbox, color) {
+    context.strokeStyle = color;
+    context.beginPath();
+    context.rect(hitbox.getPositionX, hitbox.getPositionY, hitbox.getWidth, hitbox.getHeight);
+    context.stroke();
+    context.closePath();
+}
+
+
+function drawTitleImage(imageActor) {
+    context.drawImage(imageActor.getImage, imageActor.getPositionX, imageActor.getPositionY);
+}

@@ -7,4 +7,8 @@ class DeadlyHitbox extends Hitbox {
     killPlayer(player) {
         player.die();
     }
+
+    playSound() {
+        this.sound.play();
+    }
 }

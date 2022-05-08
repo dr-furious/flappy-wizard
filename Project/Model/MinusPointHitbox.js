@@ -8,4 +8,8 @@ class MinusPointHitbox extends Hitbox {
         player.loosePoint();
         this.sound.play();
     }
+
+    playSound() {
+        this.sound.play();
+    }
 }

@@ -8,14 +8,39 @@ class Player extends Actor {
         this.width = 72;
         this.height = 128;
         this.isAbleToGainPoint = true;
+        this.isAbleToLoosePoint = true;
         this.hitBoxOne = new Hitbox(this.getPositionX + this.getWidth / 5 * 2, this.getPositionY + this.getHeight / 4, this.getWidth / 9 * 4, this.getHeight / 4);
         this.hitBoxTwo = new Hitbox(this.getPositionX + this.getWidth / 7 * 2, this.getPositionY + this.getHeight / 5 * 2, this.getWidth / 9 * 4, this.getHeight / 4);
+        this.observers = [];
+    }
+
+    notifyObservers() {
+        this.observers.forEach(observer => {
+            observer.notify(this);
+        });
+    }
+
+    addObserver(observer) {
+        this.observers.push(observer);
+    }
+
+    removeObserver(observer) {
+        for (const observerKey in this.observers) {
+            if (this.observers[observerKey] === observer) {
+                let tempObserver = this.observers[observerKey];
+                this.observers[observerKey] = this.observers[this.observers.length - 1];
+                this.observers[this.observers.length - 1] = tempObserver;
+                this.observers.pop();
+                return;
+            }
+        }
     }
 
     fall(minusHigh) {
         this.positionY += minusHigh;
         this.hitBoxOne.updatePosition(this.getPositionX + this.getWidth / 5 * 2, this.getPositionY + this.getHeight / 4);
         this.hitBoxTwo.updatePosition(this.getPositionX + this.getWidth / 7 * 2, this.getPositionY + this.getHeight / 5 * 2);
+        this.notifyObservers();
     }
 
     die() {
@@ -26,11 +51,11 @@ class Player extends Actor {
         this.isDead = false;
     }
 
-    jump(speed, sound) {
+    jump(speed) {
         this.positionY -= speed;
         this.hitBoxOne.updatePosition(this.getPositionX + this.getWidth / 5 * 2, this.getPositionY + this.getHeight / 4);
         this.hitBoxTwo.updatePosition(this.getPositionX + this.getWidth / 7 * 2, this.getPositionY + this.getHeight / 5 * 2);
-        sound.play();
+        this.notifyObservers();
     }
 
     goForward(plusHorizontal) {
@@ -44,6 +69,8 @@ class Player extends Actor {
     resetStats() {
         this.points = 0;
         this.missedHooks = 0;
+        this.isAbleToGainPoint = true;
+        this.isAbleToLoosePoint = true;
     }
 
     gainPoint() {
@@ -71,8 +98,12 @@ class Player extends Actor {
         this.positionY = positionY;
     }
 
-    set setIsAbleToGainPoints(value) {
+    set setIsAbleToGain(value) {
         this.isAbleToGainPoint = value;
+    }
+
+    set setIsAbleToLoose(value) {
+        this.isAbleToLoosePoint = value;
     }
 
     get getName() {
@@ -113,5 +144,9 @@ class Player extends Actor {
 
     get isAbleToGain() {
         return this.isAbleToGainPoint;
+    }
+
+    get isAbleToLoose() {
+        return this.isAbleToLoosePoint;
     }
 }

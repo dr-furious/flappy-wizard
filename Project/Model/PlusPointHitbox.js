@@ -8,4 +8,8 @@ class PlusPointHitbox extends Hitbox {
         player.gainPoint();
         this.sound.play();
     }
+
+    playSound() {
+        this.sound.play();
+    }
 }

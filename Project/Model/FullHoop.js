@@ -1,6 +1,6 @@
 class FullHoop {
 
-    constructor(hoopFront, hoopBack, min, max) {
+    constructor(hoopFront, hoopBack, min, max, soundGainPoint, soundLoosePoint, soundDying) {
         this.min = min;
         this.max = max;
         this.hoopFront = new Hoop(hoopFront.getImage, hoopFront.getCanvasWidth);
@@ -8,12 +8,16 @@ class FullHoop {
         this.hoopFront.setPositionY = this.generateRandomNumberInRange(min, max);
         this.hoopBack.setPositionY = this.hoopFront.getPositionY;
         this.plusPointHitbox = new PlusPointHitbox(Math.round(this.hoopBack.getPositionX + this.hoopBack.getWidth / 2 - 5),
-            this.hoopBack.getPositionY + 10, 4, this.hoopBack.getHeight / 11 * 4);
+            this.hoopBack.getPositionY + 10, 4, this.hoopBack.getHeight / 11 * 4, soundGainPoint);
         this.minusPointHitbox = new MinusPointHitbox(this.hoopBack.getPositionX + this.hoopBack.getWidth / 2 - 5,
-            -5, 4, this.hoopBack.getPositionY);
-        this.killHitboxOne = new DeadlyHitbox(Math.round(this.hoopBack.getPositionX + this.hoopBack.getWidth / 2 - 5), this.hoopBack.getPositionY, 4, 5);
+            -5, 4, this.hoopBack.getPositionY, soundLoosePoint);
+        this.killHitboxOne = new DeadlyHitbox(Math.round(this.hoopBack.getPositionX + this.hoopBack.getWidth / 2 - 5), this.hoopBack.getPositionY, 4, 5, soundDying);
         this.killHitboxTwo = new DeadlyHitbox(Math.round(this.hoopBack.getPositionX + this.hoopBack.getWidth / 2 - 5),
-            this.plusPointHitbox.getPositionY + this.plusPointHitbox.getHeight, 4, this.max * 2);
+            this.plusPointHitbox.getPositionY + this.plusPointHitbox.getHeight, 4, this.max * 2, soundDying);
+    }
+
+    notify(player) {
+        this.isPlayerTouching(player);
     }
 
     moveLeft(speed) {
@@ -38,21 +42,34 @@ class FullHoop {
         if (this.plusPointHitbox.isIntersecting(player.getHitboxTwo)) {
             if (player.isAbleToGain) {
                 player.gainPoint();
-                player.setIsAbleToGainPoints = false;
+                this.plusPointHitbox.playSound();
+                player.setIsAbleToGain = false;
             }
         }
         if (this.plusPointHitbox.isOnePointBehind(player.getHitboxTwo)) {
             if (!player.isAbleToGain) {
-                player.setIsAbleToGainPoints = true;
+                player.setIsAbleToGain = true;
+            }
+        }
+
+        if (this.minusPointHitbox.isIntersecting(player.getHitboxTwo)) {
+            if (player.isAbleToLoose) {
+                player.loosePoint();
+                this.minusPointHitbox.playSound();
+                player.setIsAbleToLoose = false;
+            }
+        }
+        if (this.minusPointHitbox.isOnePointBehind(player.getHitboxTwo)) {
+            if (!player.isAbleToLoose) {
+                player.setIsAbleToLoose = true;
             }
         }
 
         if (this.killHitboxOne.isIntersecting(player.getHitboxOne) || this.killHitboxOne.isIntersecting(player.getHitboxTwo)
             || this.killHitboxTwo.isIntersecting(player.getHitboxOne) || this.killHitboxTwo.isIntersecting(player.getHitboxTwo)) {
-            player.die();
+            this.killHitboxOne.killPlayer(player);
+            this.killHitboxOne.playSound();
         }
-
-
     }
 
     generateRandomNumberInRange(min, max) {

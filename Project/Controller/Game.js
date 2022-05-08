@@ -4,11 +4,11 @@ class Game {
     static speedUpInterval;
     static time;
     static backBackgroundSpeed = 0.5;
-    static frontBackgroundSpeed = 4;
+    static frontBackgroundSpeed = 5;
     static defaultBackBackgroundSpeed = this.backBackgroundSpeed;
     static defaultFrontBackgroundSpeed = this.frontBackgroundSpeed;
 
-    static FPS = 1000 / 240;
+    static FPS = 1000 / 120;
 
     /**
      * Main Game manipulation functions

@@ -78,7 +78,7 @@ class Hitbox extends Actor {
         let bX2 = bX1 + hitbox.getWidth;
         let bY2 = bY1 + hitbox.getHeight;
 
-        return (Math.ceil(bX1) - Math.ceil(aX2)) >= 0 && (Math.ceil(bX1) - Math.ceil(aX2)) <= 3 && (bY1 >= aY1 && bY2 <= aY2);
+        return (Math.ceil(bX1) - Math.ceil(aX2)) >= 0 && (Math.ceil(bX1) - Math.ceil(aX2)) <= 4 && (bY1 >= aY1 && bY2 <= aY2);
     }
 
     updatePosition(positionX, positionY) {

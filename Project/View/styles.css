@@ -42,7 +42,7 @@
 }
 
 body {
-    background-color: cornsilk;
+    background: linear-gradient(45deg, #5b5b8d, #13134b);
     font-family: var(--in-menu-font);
     color: silver;
 }

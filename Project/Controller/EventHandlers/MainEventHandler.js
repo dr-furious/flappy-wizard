@@ -28,23 +28,29 @@ volumes.push(clinkSound);
 // =================== IMAGES AND IMAGE FIELDS INITIALIZATION ===================
 // ===============================================================================================================
 
+// Title image
+let titleImage = document.getElementById("title-image");
+let titleImageActor = new Actor(titleImage, 0, 0);
+
 // Hoops and player
 let hoopImageBack = document.getElementById("hoop");
 let hoopImageFront = document.getElementById("hoop-front");
 let harryPotterImage = document.getElementById("Harry-Potter-wizard");
 
 let harryPotter = new Player(harryPotterImage, 200, 100);
-harryPotter.setWidth = 72;
-harryPotter.setHeight = 128;
 
 let hoopFront = new Hoop(hoopImageFront, canvas.width);
 let hoopBack = new Hoop(hoopImageBack, canvas.width);
-let fullHoopOne = new FullHoop(hoopFront, hoopBack, 0, canvas.height - 400);
-let fullHoopTwo = new FullHoop(hoopFront, hoopBack, 0, canvas.height - 400);
-let fullHoopThree = new FullHoop(hoopFront, hoopBack, 0, canvas.height - 400);
+let fullHoopOne = new FullHoop(hoopFront, hoopBack, 0, canvas.height - 400, clinkSound, flyUpSound, knockSound);
+let fullHoopTwo = new FullHoop(hoopFront, hoopBack, 0, canvas.height - 400, clinkSound, flyUpSound, knockSound);
+let fullHoopThree = new FullHoop(hoopFront, hoopBack, 0, canvas.height - 400, clinkSound, flyUpSound, knockSound);
 fullHoopOne.setPositionX = 0;
 fullHoopTwo.setPositionX = canvas.width / 2 + canvas.width / 3;
 fullHoopThree.setPositionX = canvas.width + canvas.width / 3;
+
+harryPotter.addObserver(fullHoopOne);
+harryPotter.addObserver(fullHoopTwo);
+harryPotter.addObserver(fullHoopThree);
 
 // Images for level EASY
 let imagesLevelEasy = [];
@@ -227,6 +233,17 @@ let returnButtonVirtual = new ReturnButton(clickSound, gameMenus);
 let switchToGameOverMenuButton = new SwitchMenusButton(clickSound, gameOverMenu, gameMenus);
 
 
+// On page load/reload
+let players = [];
+let sortedPlayers = [];
+window.onload = () => {
+    //localStorage.clear();
+    players = retrievePlayersData(false);
+    sortedPlayers = retrievePlayersData(true);
+    printPlayersData(sortedPlayers);
+    drawTitleImage(titleImageActor);
+}
+
 // Onclick events - others
 
 mainMenu.onclick = () => {
@@ -285,6 +302,7 @@ playButton.onclick = () => {
     Game.start(runAndCheck);
     moveScene();
     let byFactor = speedUpAccordingly();
+    console.log(byFactor)
     Game.speedUp(byFactor);
     playButtonVirtual.switchMenus();
     setPlayerStat(harryPotter.getName, nameTitle);
@@ -314,6 +332,7 @@ restartButtons.forEach(restartButton => {
         resumeRestartButtonVirtual.playClick();
         resetDefaultPositions();
         playButtonVirtual.replayMusic();
+        players.push(harryPotter.getName + "*" + harryPotter.getPoints);
         fullHoopOne.setPositionX = 0;
         fullHoopTwo.setPositionX = canvas.width / 2 + canvas.width / 3;
         fullHoopThree.setPositionX = canvas.width + canvas.width / 3;
@@ -342,11 +361,19 @@ quitButtons.forEach(quitButton => {
         clearInterval(movingInterval);
         quitButtonVirtual.playClick();
         quitButtonVirtual.replayMusic();
+        players.push(harryPotter.getName + "*" + harryPotter.getPoints);
         // Store data
         harryPotter.resetStats();
         quitButtonVirtual.switchMenus();
+        drawTitleImage(titleImageActor);
         resetDefaultPositions();
         // Update leaderboard
+        localStorage.clear();
+        for (const playersKey in players) {
+            localStorage.setItem(playersKey, players[playersKey]);
+        }
+        sortedPlayers = retrievePlayersData(true);
+        printPlayersData(sortedPlayers);
     });
 });
 
@@ -416,9 +443,7 @@ function runAndCheck() {
         switchToGameOverMenuButton.switchMenus();
     }
     mainLoop();
-    fullHoopOne.isPlayerTouching(harryPotter);
-    fullHoopTwo.isPlayerTouching(harryPotter);
-    fullHoopThree.isPlayerTouching(harryPotter);
+    /*
     drawHitbox(fullHoopOne.getPlusPointHitbox, "green");
     drawHitbox(fullHoopTwo.getPlusPointHitbox, "green");
     drawHitbox(fullHoopThree.getPlusPointHitbox, "green");
@@ -433,6 +458,7 @@ function runAndCheck() {
     drawHitbox(fullHoopThree.getKillHitboxTwo, "red");
     drawHitbox(harryPotter.getHitboxOne, "black");
     drawHitbox(harryPotter.getHitboxTwo, "black");
+     */
 }
 
 function speedUpAccordingly() {
@@ -469,12 +495,12 @@ function resetDefaultPositions() {
 
 
 function moveScene() {
-    if (!harryPotter.isAlive) {
-        return;
-    }
-    let backBackgroundSpeed = Game.backBackgroundSpeed;
-    let frontBackgroundSpeed = Game.frontBackgroundSpeed;
     movingInterval = setInterval(() => {
+        if (!harryPotter.isAlive) {
+            return;
+        }
+        let backBackgroundSpeed = Game.backBackgroundSpeed;
+        let frontBackgroundSpeed = Game.frontBackgroundSpeed;
         if (flag === 0) {
             extendedBackgroundEasyLayerOne.moveLeft(backBackgroundSpeed);
             extendedBackgroundEasyLayerTwo.moveLeft(frontBackgroundSpeed);
@@ -510,10 +536,70 @@ function moveScene() {
 }
 
 
-function drawHitbox(hitbox, color) {
-    context.strokeStyle = color;
-    context.beginPath();
-    context.rect(hitbox.getPositionX, hitbox.getPositionY, hitbox.getWidth, hitbox.getHeight);
-    context.stroke();
-    context.closePath();
+function retrievePlayersData(sorted) {
+    let players = [];
+    let item = localStorage.getItem("0");
+    let counter = 0;
+    while (item !== null) {
+        players.push(item);
+        item = localStorage.getItem((++counter).toString());
+    }
+
+    if (!sorted) {
+        return players;
+    }
+
+    let sortedPlayers = [];
+    for (const i in players) {
+        let playerData = players[i].split("*");
+        //console.log(playerData[0] + " : " + playerData[1]);
+        sortedPlayers.push(playerData);
+    }
+    sortedPlayers.sort((a, b) => b[1] - a[1]);
+    return sortedPlayers;
+}
+
+function printPlayersData(sortedPlayers) {
+    let leaderboardContainer = document.getElementById("leaderboard-table-id-container");
+    let leaderboardDelete = document.getElementById("leaderboard-table-id");
+    leaderboardContainer.removeChild(leaderboardDelete);
+    let leaderboard = document.createElement("div");
+    leaderboard.classList.add("leaderboard-table");
+    leaderboard.setAttribute("id", "leaderboard-table-id");
+    for (const sortedPlayersKey in sortedPlayers) {
+        console.log(sortedPlayers[sortedPlayersKey][0] + " : " + sortedPlayers[sortedPlayersKey][1]);
+        addLeaderBoardItem(leaderboard, sortedPlayers[sortedPlayersKey][0], sortedPlayers[sortedPlayersKey][1], parseInt(sortedPlayersKey) + 1 + ".");
+    }
+
+    leaderboardContainer.appendChild(leaderboard);
+}
+
+function addLeaderBoardItem(parentElement, playerName, playerScore, order) {
+    let leaderBoardItem = document.createElement("div");
+    leaderBoardItem.classList.add("leaderboard-item");
+
+    let leaderBoardNumber = document.createElement("div");
+    leaderBoardNumber.classList.add("leaderBoardNumber");
+
+    let leaderBoardNumberCircle = document.createElement("div");
+    leaderBoardNumberCircle.classList.add("leaderboard-number-circle");
+    let number = document.createTextNode(order);
+    leaderBoardNumberCircle.append(number);
+
+    let leaderboardName = document.createElement("div");
+    leaderboardName.classList.add("leaderboard-name");
+    let name = document.createTextNode(playerName);
+    leaderboardName.appendChild(name);
+
+    let leaderBoardScore = document.createElement("div");
+    leaderBoardScore.classList.add("leaderboard-score");
+    let score = document.createTextNode(playerScore);
+    leaderBoardScore.appendChild(score);
+
+    leaderBoardNumber.appendChild(leaderBoardNumberCircle);
+    leaderBoardItem.appendChild(leaderBoardNumber);
+    leaderBoardItem.appendChild(leaderboardName);
+    leaderBoardItem.appendChild(leaderBoardScore);
+
+    parentElement.appendChild(leaderBoardItem);
 }

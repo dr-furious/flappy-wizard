@@ -8,10 +8,37 @@
 
     <link rel="stylesheet" href="styles.css">
 
+    <script defer src=../Model/Actor.js></script>
+    <script defer src=../Model/Background.js></script>
+    <script defer src=../Model/Player.js></script>
+    <script defer src=../Model/ExtendedBackground.js></script>
+    <script defer src=../Model/Hitbox.js></script>
+    <script defer src=../Model/PlusPointHitbox.js></script>
+    <script defer src=../Model/MinusPointHitbox.js></script>
+    <script defer src=../Model/DeadlyHitbox.js></script>
+    <script defer src=../Model/Hoop.js></script>
+    <script defer src=../Model/FullHoop.js></script>
+    <script defer src="../Controller/EventHandlers/KeyboardEvents.js"></script>
+    <script defer src=../Controller/Game.js></script>
+    <script defer src="../Controller/Buttons/GameButton.js"></script>
+    <script defer src="../Controller/Buttons/SwitchMenusButton.js"></script>
+    <script defer src="../Controller/Buttons/HelpButton.js"></script>
+    <script defer src="../Controller/Buttons/LoadGameButton.js"></script>
+    <script defer src="../Controller/Buttons/PauseButton.js"></script>
+    <script defer src="../Controller/Buttons/PlayButton.js"></script>
+    <script defer src="../Controller/Buttons/QuitButton.js"></script>
+    <script defer src="../Controller/Buttons/ReturnButton.js"></script>
+    <script defer src="../Controller/Buttons/SoundButton.js"></script>
+    <script defer src=../Controller/EventHandlers/MainEventHandler.js></script>
+    <script defer src=../View/GameView.js></script>
+    <script defer src="../Main.js"></script>
+
     <title>Game</title>
 </head>
 
 <body>
+<img src="../../Images/title-image.png" alt="bg" id="title-image" hidden>
+
 <img src="../../Images/Level%20Easy/level-easy-background-layer-1.png" alt="bg" id="background-easy-layer-1" hidden>
 <img src="../../Images/Level%20Easy/level-easy-background-layer-2.png" alt="bg" id="background-easy-layer-2" hidden>
 <img src="../../Images/Level%20Easy/level-easy-background-layer-3.png" alt="bg" id="background-easy-layer-3" hidden>
@@ -356,8 +383,8 @@
                 <hr id="leaderboard-hr">
             </div>
 
-            <div class="leaderboard-container">
-                <div class="leaderboard-table">
+            <div id="leaderboard-table-id-container" class="leaderboard-container">
+                <div id="leaderboard-table-id" class="leaderboard-table">
                     <div class="leaderboard-item">
                         <div class="leaderboard-number">
                             <div class="leaderboard-number-circle">1.</div>
@@ -672,31 +699,6 @@
 <script src="../Main.js"></script>
 <script src="../Controller/MainEventHandler.js"></script>
 -->
-
-<script src=../Model/Actor.js></script>
-<script src=../Model/Background.js></script>
-<script src=../Model/Player.js></script>
-<script src=../Model/ExtendedBackground.js></script>
-<script src=../Model/Hitbox.js></script>
-<script src=../Model/PlusPointHitbox.js></script>
-<script src=../Model/MinusPointHitbox.js></script>
-<script src=../Model/DeadlyHitbox.js></script>
-<script src=../Model/Hoop.js></script>
-<script src=../Model/FullHoop.js></script>
-<script src="../Controller/EventHandlers/KeyboardEvents.js"></script>
-<script src=../Controller/Game.js></script>
-<script src="../Controller/Buttons/GameButton.js"></script>
-<script src="../Controller/Buttons/SwitchMenusButton.js"></script>
-<script src="../Controller/Buttons/HelpButton.js"></script>
-<script src="../Controller/Buttons/LoadGameButton.js"></script>
-<script src="../Controller/Buttons/PauseButton.js"></script>
-<script src="../Controller/Buttons/PlayButton.js"></script>
-<script src="../Controller/Buttons/QuitButton.js"></script>
-<script src="../Controller/Buttons/ReturnButton.js"></script>
-<script src="../Controller/Buttons/SoundButton.js"></script>
-<script src=../Controller/EventHandlers/MainEventHandler.js></script>
-<script src=../View/GameView.js></script>
-<script src="../MainTwo.js"></script>
 
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
