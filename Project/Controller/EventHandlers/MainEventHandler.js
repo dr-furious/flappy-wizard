@@ -238,6 +238,7 @@ let players = [];
 let sortedPlayers = [];
 window.onload = () => {
     //localStorage.clear();
+    //return;
     players = retrievePlayersData(false);
     sortedPlayers = retrievePlayersData(true);
     printPlayersData(sortedPlayers);
@@ -409,7 +410,6 @@ goHomeButtons.forEach(goHomeButton => {
 
 returnButton.onclick = () => {
     returnButtonVirtual.playClick();
-    console.log(1)
     returnButtonVirtual.hideLastDisplayedMenu();
 }
 
