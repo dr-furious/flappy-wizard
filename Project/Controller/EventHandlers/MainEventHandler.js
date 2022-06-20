@@ -36,8 +36,10 @@ let titleImageActor = new Actor(titleImage, 0, 0);
 let hoopImageBack = document.getElementById("hoop");
 let hoopImageFront = document.getElementById("hoop-front");
 let harryPotterImage = document.getElementById("Harry-Potter-wizard");
+let starsImage = document.getElementById("stars");
 
-let harryPotter = new Player(harryPotterImage, 200, 100);
+let stars = new Stars(starsImage, 200, 100);
+let harryPotter = new Player(harryPotterImage, 200, 100, stars);
 
 let hoopFront = new Hoop(hoopImageFront, canvas.width);
 let hoopBack = new Hoop(hoopImageBack, canvas.width);
@@ -299,6 +301,7 @@ playButton.onclick = () => {
     playButtonVirtual.playClick();
     playButtonVirtual.replayMusic();
     harryPotter.resetStats();
+    harryPotter.getStars.animateStars();
     resetDefaultPositions();
     Game.start(runAndCheck);
     moveScene();
@@ -312,6 +315,7 @@ playButton.onclick = () => {
 // Pauses the game
 pauseButton.onclick = () => {
     Game.pause();
+    harryPotter.getStars.cancelAnimation();
     clearInterval(movingInterval);
     pauseButtonVirtual.playClick();
     pauseButtonVirtual.switchMenus();
@@ -330,6 +334,7 @@ pauseButton.onclick = () => {
 restartButtons.forEach(restartButton => {
     restartButton.addEventListener("click", () => {
         harryPotter.resurrect();
+        harryPotter.getStars.animateStars();
         resumeRestartButtonVirtual.playClick();
         resetDefaultPositions();
         playButtonVirtual.replayMusic();
@@ -353,6 +358,7 @@ resumeButton.onclick = () => {
     pausedGameMenu.setAttribute("hidden", "");
     inGameMenu.removeAttribute("hidden");
     Game.resume(runAndCheck);
+    harryPotter.getStars.animateStars();
     moveScene();
 }
 
@@ -360,6 +366,7 @@ resumeButton.onclick = () => {
 quitButtons.forEach(quitButton => {
     quitButton.addEventListener("click", () => {
         clearInterval(movingInterval);
+        harryPotter.getStars.cancelAnimation();
         quitButtonVirtual.playClick();
         quitButtonVirtual.replayMusic();
         players.push(harryPotter.getName + "*" + harryPotter.getPoints);
@@ -443,6 +450,7 @@ function runAndCheck() {
         switchToGameOverMenuButton.switchMenus();
     }
     mainLoop();
+
     /*
     drawHitbox(fullHoopOne.getPlusPointHitbox, "green");
     drawHitbox(fullHoopTwo.getPlusPointHitbox, "green");
@@ -458,7 +466,9 @@ function runAndCheck() {
     drawHitbox(fullHoopThree.getKillHitboxTwo, "red");
     drawHitbox(harryPotter.getHitboxOne, "black");
     drawHitbox(harryPotter.getHitboxTwo, "black");
+
      */
+
 }
 
 function speedUpAccordingly() {

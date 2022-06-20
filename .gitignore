@@ -1,6 +1,6 @@
 # Ignore following folders
 Progress/
 Documentation/
-MSivak_Final/
 *.zip
+*.DS_Store
 

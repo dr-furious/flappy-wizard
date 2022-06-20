@@ -1,5 +1,5 @@
 class Player extends Actor {
-    constructor(image, positionX, positionY) {
+    constructor(image, positionX, positionY, stars) {
         super(image, positionX, positionY);
         this.name = null;
         this.points = 0;
@@ -12,6 +12,8 @@ class Player extends Actor {
         this.hitBoxOne = new Hitbox(this.getPositionX + this.getWidth / 5 * 2, this.getPositionY + this.getHeight / 4, this.getWidth / 9 * 4, this.getHeight / 4);
         this.hitBoxTwo = new Hitbox(this.getPositionX + this.getWidth / 7 * 2, this.getPositionY + this.getHeight / 5 * 2, this.getWidth / 9 * 4, this.getHeight / 4);
         this.observers = [];
+        this.stars = stars;
+
     }
 
     notifyObservers() {
@@ -41,7 +43,9 @@ class Player extends Actor {
         this.hitBoxOne.updatePosition(this.getPositionX + this.getWidth / 5 * 2, this.getPositionY + this.getHeight / 4);
         this.hitBoxTwo.updatePosition(this.getPositionX + this.getWidth / 7 * 2, this.getPositionY + this.getHeight / 5 * 2);
         this.notifyObservers();
+        this.stars.positionY += minusHigh;
     }
+
 
     die() {
         this.isDead = true;
@@ -56,6 +60,7 @@ class Player extends Actor {
         this.hitBoxOne.updatePosition(this.getPositionX + this.getWidth / 5 * 2, this.getPositionY + this.getHeight / 4);
         this.hitBoxTwo.updatePosition(this.getPositionX + this.getWidth / 7 * 2, this.getPositionY + this.getHeight / 5 * 2);
         this.notifyObservers();
+        this.stars.positionY -= speed;
     }
 
     goForward(plusHorizontal) {
@@ -148,5 +153,9 @@ class Player extends Actor {
 
     get isAbleToLoose() {
         return this.isAbleToLoosePoint;
+    }
+
+    get getStars() {
+        return this.stars;
     }
 }

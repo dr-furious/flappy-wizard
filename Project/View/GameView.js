@@ -10,7 +10,13 @@ function setPlayerStat(playerStat, destination) {
     destination.innerText = playerStat;
 }
 
-function drawScene(items, context) {
+function drawAnimation() {
+    //context.drawImage(harryPotter.getStars.getImage, harryPotter.getStars.getPositionX, harryPotter.getStars.getPositionY);
+    context.drawImage(harryPotter.getStars.getImage, harryPotter.getStars.getStarsSX, 0, 64,
+        64, harryPotter.getPositionX - 20, harryPotter.getPositionY + 80, 32, 32);
+}
+
+function drawScene(items, context, player) {
     /**
      context.clearRect(0, 0, canvas.width, canvas.height);
      context.drawImage(backgroundLayer1.getBackgroundOne.getImage, backgroundLayer1.getBackgroundOne.getPositionX, backgroundLayer1.getBackgroundOne.getPositionY);
@@ -22,9 +28,11 @@ function drawScene(items, context) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     items.forEach(item => {
         context.drawImage(item.getImage, item.getPositionX, item.getPositionY, item.getWidth, item.getHeight);
+        if (item === player) {
+            drawAnimation();
+        }
     })
 }
-
 
 function drawHitbox(hitbox, color) {
     context.strokeStyle = color;

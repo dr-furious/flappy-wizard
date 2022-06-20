@@ -10,6 +10,7 @@ class PlusPointHitbox extends Hitbox {
     }
 
     playSound() {
+        this.sound.currentTime = 0;
         this.sound.play();
     }
 }
